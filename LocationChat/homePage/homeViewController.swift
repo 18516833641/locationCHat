@@ -24,7 +24,11 @@ class homeViewController: AnalyticsViewController {
         tableView.register(UINib(nibName: "friendTableViewCell", bundle: nil), forCellReuseIdentifier: "friendTableViewCell")
         
 //        self.navigationItem.leftBarButtonItem = nil
+        
+        quertLocation()
     }
+    
+    
     
     @IBAction func addAction(_ sender: Any) {
         let vc = addFriendViewController()
@@ -48,6 +52,59 @@ class homeViewController: AnalyticsViewController {
                     }
                     
                 }
+        
+    }
+    
+    func quertLocation() {
+        
+        //查找GameScore表
+        
+        let user = BmobUser.current()
+
+        let userPhone = user?.mobilePhoneNumber ?? ""
+
+       
+        let query:BmobQuery = BmobQuery(className: "location")
+        query.whereKey("userPhone", notEqualTo: userPhone)
+        
+
+        query.findObjectsInBackground { (array, error) in
+            
+            
+        if error != nil {
+            //进行错误处理
+            print("======\(error)")
+        }else{
+            for i in 0..<array!.count{
+                let obj = array![i] as! BmobObject
+                let name = obj.object(forKey: "userPhone")
+                //打印名字
+                print("userPhone----------- \(name)")
+            }
+        }
+            
+            
+        }
+        
+//        query.getObjectInBackground(withId: "5b3c5d4b881") { (obj, error) in
+//                if error != nil {
+//                    //进行错误处理
+//                    print("======\(error)")
+//                }else{
+//                    if obj != nil{
+//                        //得到playerName和cheatMode
+//
+//
+//                        let playerName = obj?.object(forKey: "location") as? String
+//                        let cheatMode  = obj?.object(forKey: "cheatMode") as? Bool
+//                        print("playerName \(playerName),cheatMode \(cheatMode)")
+//                        //打印objectId,createdAt,updatedAt
+//                        print("objectid   \(obj?.objectId)")
+//                        print("createdAt  \(obj?.createdAt)")
+//                        print("updatedAt  \(obj?.updatedAt)")
+//                    }
+//                }
+//            }
         
     }
     

@@ -33,9 +33,6 @@ class userInfoViewController: AnalyticsViewController {
             textField.attributedPlaceholder = NSAttributedString.init(string:niakname as! String, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
         }
         
-        
-        
-        
     }
     
     //MARK: - 相机

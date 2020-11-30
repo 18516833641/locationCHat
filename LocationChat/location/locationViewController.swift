@@ -63,6 +63,8 @@ class locationViewController: AnalyticsViewController{
 //            CreateServiceAction()
            
         }
+        
+//        updateObjectJSONField()
        
     }
     
@@ -74,6 +76,70 @@ class locationViewController: AnalyticsViewController{
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
 
+    }
+    
+    func addLocation() {
+        
+
+        let gamescore:BmobObject = BmobObject(className: userPhone)
+        
+        gamescore.setObject(myLocation.text, forKey: "location")
+        
+        gamescore.setObject(userPhone, forKey: "userPhone")
+        
+        gamescore.setObject(myTime.text, forKey: "LocationTime")
+        
+        gamescore.setObject(nickName, forKey: "nickName")
+        
+        gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
+            if error != nil{
+                //发生错误后的动作
+                print("error is \(String(describing: error?.localizedDescription))")
+            }else{
+                //创建成功后会返回objectId，updatedAt，createdAt等信息
+                //创建对象成功，打印对象值
+                if let game = gamescore {
+                    print("-----save success \(game)")
+                    
+                }
+            }
+        }
+    }
+    
+    
+    func updateLocation(){
+      
+        
+//        let gamescore:BmobObject = BmobObject(className: "location")
+        let gamescore:BmobObject = BmobObject(className: "location")
+    
+        gamescore.setObject(myLocation.text, forKey: "location")
+        
+        gamescore.setObject(userPhone, forKey: "userPhone")
+        
+        gamescore.setObject(myTime.text, forKey: "LocationTime")
+        
+        gamescore.setObject(nickName, forKey: "nickName")
+        gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
+            if error != nil{
+                //发生错误后的动作
+                print("error is-------- \(error?.localizedDescription)")
+            }else{
+                //创建对象成功，打印对象值
+                //创建成功后会返回objectId，updatedAt，createdAt等信息
+                if let game = gamescore {
+                    print("save success \(game)")
+//                    game.setObject(110, forKey: "score")
+                    game.updateInBackground(resultBlock: { (isSuccessful, error) in
+                        if isSuccessful {
+                            print("update successfully");
+                        }else{
+                            print("update error is========== \(error?.localizedDescription)")
+                        }
+                    })
+                }
+            }
+        }
     }
     
     /**
@@ -193,6 +259,8 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
             NSLog("reGeocode:%@", reGeocode)
             myLocation.text = reGeocode.formattedAddress
             myTime.text = currentTime()
+//            addLocation()
+            updateLocation()
         }
     }
   
