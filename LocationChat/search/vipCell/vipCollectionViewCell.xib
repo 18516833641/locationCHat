@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="vipCollectionViewCell" customModule="LocationChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="470" height="199"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="470" height="199"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGG-LW-cVH">
+                        <rect key="frame" x="0.0" y="44" width="470" height="121"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vip_card" translatesAutoresizingMaskIntoConstraints="NO" id="9jz-4e-rYz">
+                                <rect key="frame" x="0.0" y="0.0" width="470" height="121"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年卡会员（折合¥0.67/天）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwb-md-sSM">
+                                <rect key="frame" x="257.5" y="81.5" width="192.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.054901960784313725" green="0.054901960784313725" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 98" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNO-7f-3yG">
+                                <rect key="frame" x="217.5" y="50" width="35.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99709683660000004" green="0.0065117869530000004" blue="0.0076262345540000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9jz-4e-rYz" firstAttribute="height" secondItem="OGG-LW-cVH" secondAttribute="height" id="9Pd-pA-v67"/>
+                            <constraint firstItem="9jz-4e-rYz" firstAttribute="centerY" secondItem="OGG-LW-cVH" secondAttribute="centerY" id="KB0-GR-ykP"/>
+                            <constraint firstAttribute="bottom" secondItem="wwb-md-sSM" secondAttribute="bottom" constant="20" id="QV7-Hd-kdn"/>
+                            <constraint firstItem="9jz-4e-rYz" firstAttribute="width" secondItem="OGG-LW-cVH" secondAttribute="width" id="Y1Y-1U-hxJ"/>
+                            <constraint firstAttribute="trailing" secondItem="wwb-md-sSM" secondAttribute="trailing" constant="20" id="cYB-GI-ZZR"/>
+                            <constraint firstItem="yNO-7f-3yG" firstAttribute="centerY" secondItem="OGG-LW-cVH" secondAttribute="centerY" id="no9-ia-hiy"/>
+                            <constraint firstItem="9jz-4e-rYz" firstAttribute="centerX" secondItem="OGG-LW-cVH" secondAttribute="centerX" id="rnw-oa-P9M"/>
+                            <constraint firstItem="yNO-7f-3yG" firstAttribute="centerX" secondItem="OGG-LW-cVH" secondAttribute="centerX" id="yUR-uI-NFC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="OGG-LW-cVH" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="NgV-hh-HoY"/>
+                <constraint firstItem="OGG-LW-cVH" firstAttribute="width" secondItem="ZTg-uK-7eu" secondAttribute="width" id="RGn-xX-dN3"/>
+                <constraint firstItem="OGG-LW-cVH" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="tRC-it-ve7"/>
+                <constraint firstItem="OGG-LW-cVH" firstAttribute="height" secondItem="ZTg-uK-7eu" secondAttribute="height" id="uIL-nX-f9M"/>
+            </constraints>
+            <size key="customSize" width="470" height="199"/>
+            <connections>
+                <outlet property="money" destination="yNO-7f-3yG" id="nRZ-at-vFV"/>
+                <outlet property="title" destination="wwb-md-sSM" id="PEb-mJ-DVN"/>
+                <outlet property="vipIcon" destination="9jz-4e-rYz" id="ePY-DA-ngA"/>
+            </connections>
+            <point key="canvasLocation" x="110" y="83"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="vip_card" width="655" height="325"/>
+    </resources>
+</document>

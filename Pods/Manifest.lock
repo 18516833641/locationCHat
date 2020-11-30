@@ -1,0 +1,88 @@
+PODS:
+  - Alamofire (5.4.0)
+  - AMap2DMap (5.6.1):
+    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.6.5.1)
+  - AMapLocation (2.6.7):
+    - AMapFoundation (~> 1.6.4)
+  - AMapTrack (1.4.0):
+    - AMapFoundation (~> 1.6.4)
+    - AMapLocation (~> 2.6.7)
+  - BmobSDK (2.4.1)
+  - IQKeyboardManager (6.4.2)
+  - MJRefresh (3.2.3)
+  - MMDrawerController (0.6.0):
+    - MMDrawerController/Core (= 0.6.0)
+    - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
+    - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
+    - MMDrawerController/Subclass (= 0.6.0)
+  - MMDrawerController/Core (0.6.0)
+  - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/MMDrawerVisualStates (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.6.0):
+    - MMDrawerController/Core
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
+  - Spring (1.0.6)
+  - SVProgressHUD (2.2.5)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AMap2DMap
+  - AMapLocation
+  - AMapTrack
+  - BmobSDK (~> 2.4.1)
+  - IQKeyboardManager (~> 6.4.0)
+  - MJRefresh (~> 3.2.0)
+  - MMDrawerController
+  - SDWebImage (~> 5.0)
+  - Spring (from `https://github.com/MengTo/Spring.git`)
+  - SVProgressHUD (~> 2.2.5)
+  - SwiftyJSON
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AMap2DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapTrack
+    - BmobSDK
+    - IQKeyboardManager
+    - MJRefresh
+    - MMDrawerController
+    - SDWebImage
+    - SVProgressHUD
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  Spring:
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 50d92a5b9e08848387ae95bf44c6ad20834f7083
+    :git: https://github.com/MengTo/Spring.git
+
+SPEC CHECKSUMS:
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
+  AMapFoundation: b67560a6f21aab81c8c12f84616b55a3833b6253
+  AMapLocation: a46c30d9930d0f3a3bd21139d8f845d10ac3f01d
+  AMapTrack: 0e23672ef7234b86f95ec1c4f50bf48166e2cd0d
+  BmobSDK: 930525437e6602f7146108e11a9796604a1edbb9
+  IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
+  MJRefresh: 2b1214a2dc8f4df4c5dcb028ea2ad4e245425fb7
+  MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  Spring: 3d113f14575ef79aec9c5f906dfa4f5001c03254
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: 2d5a228cb616587dd7e7b7aa8cbf663b76c78101
+
+COCOAPODS: 1.10.0
