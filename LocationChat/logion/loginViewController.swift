@@ -56,12 +56,13 @@ class loginViewController: AnalyticsViewController {
             let user = BmobUser()
             user.mobilePhoneNumber = loginUser.text//手机号
             user.setObject("0", forKey: "vip")//vip
+            user.setObject("0", forKey: "cancel")//是否注销账户
             user.signUpOrLoginInbackground(withSMSCode: loginPass.text) { (isSuccessful, error) in
                 if error == nil{
                     
                     print("\(user)")
                     
-                    SVProgressHUD.showSuccess(withStatus: "恭喜您注册成功")
+                    SVProgressHUD.showSuccess(withStatus: "登录成功")
                     SVProgressHUD.dismiss(withDelay: 0.75)
                     self.navigationController!.popViewController(animated: true)
                     

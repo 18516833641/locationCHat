@@ -63,6 +63,9 @@
 		046E71CF254FB47300E45F8C /* leftRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046E71CD254FB47300E45F8C /* leftRootViewController.xib */; };
 		04731F262568DB510039A41A /* SmileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04731F252568DB510039A41A /* SmileAlert.swift */; };
 		04AB12B7255CBBC00060F30C /* HttpAddressUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB12B3255CBBBF0060F30C /* HttpAddressUtil.swift */; };
+		04B4739F2574CFDC00CD2719 /* guijiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4739D2574CFDC00CD2719 /* guijiViewController.swift */; };
+		04B473A02574CFDC00CD2719 /* guijiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4739E2574CFDC00CD2719 /* guijiViewController.xib */; };
+		04B473A32574DF7400CD2719 /* YHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B473A22574DF7400CD2719 /* YHTextView.swift */; };
 		04B623ED256DF7E6008E5B27 /* HttpsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B623EC256DF7E6008E5B27 /* HttpsRequest.swift */; };
 		04DAB5BB2567587500E32670 /* yinsiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB5B92567587500E32670 /* yinsiViewController.swift */; };
 		04DAB5BC2567587500E32670 /* yinsiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAB5BA2567587500E32670 /* yinsiViewController.xib */; };
@@ -131,6 +134,9 @@
 		046E71CD254FB47300E45F8C /* leftRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = leftRootViewController.xib; sourceTree = "<group>"; };
 		04731F252568DB510039A41A /* SmileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileAlert.swift; sourceTree = "<group>"; };
 		04AB12B3255CBBBF0060F30C /* HttpAddressUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpAddressUtil.swift; sourceTree = "<group>"; };
+		04B4739D2574CFDC00CD2719 /* guijiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guijiViewController.swift; sourceTree = "<group>"; };
+		04B4739E2574CFDC00CD2719 /* guijiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = guijiViewController.xib; sourceTree = "<group>"; };
+		04B473A22574DF7400CD2719 /* YHTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHTextView.swift; sourceTree = "<group>"; };
 		04B623D8256DEAA8008E5B27 /* LocationChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LocationChat.entitlements; sourceTree = "<group>"; };
 		04B623EC256DF7E6008E5B27 /* HttpsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpsRequest.swift; sourceTree = "<group>"; };
 		04DAB5B92567587500E32670 /* yinsiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yinsiViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 				04B623EC256DF7E6008E5B27 /* HttpsRequest.swift */,
 				04AB12B3255CBBBF0060F30C /* HttpAddressUtil.swift */,
 				04731F252568DB510039A41A /* SmileAlert.swift */,
+				04B473A22574DF7400CD2719 /* YHTextView.swift */,
 			);
 			path = otherrClass;
 			sourceTree = "<group>";
@@ -272,6 +279,8 @@
 				046E71CD254FB47300E45F8C /* leftRootViewController.xib */,
 				040BA901255B75F3002929D1 /* myLoactionViewController.swift */,
 				040BA902255B75F3002929D1 /* myLoactionViewController.xib */,
+				04B4739D2574CFDC00CD2719 /* guijiViewController.swift */,
+				04B4739E2574CFDC00CD2719 /* guijiViewController.xib */,
 			);
 			path = location;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 				043584A8256608A500762374 /* vipCollectionViewCell.xib in Resources */,
 				041E1CA2254851BF007A751D /* locationViewController.xib in Resources */,
 				044D0C042565224100D22600 /* xieyiViewController.xib in Resources */,
+				04B473A02574CFDC00CD2719 /* guijiViewController.xib in Resources */,
 				041E1C6F25484FA3007A751D /* LaunchScreen.storyboard in Resources */,
 				041E1C982548515A007A751D /* loginViewController.xib in Resources */,
 				0440FDCC25495B450061E2C6 /* friendTableViewCell.xib in Resources */,
@@ -527,6 +537,7 @@
 				041E1C6325484FA1007A751D /* AppDelegate.swift in Sources */,
 				040BA903255B75F3002929D1 /* myLoactionViewController.swift in Sources */,
 				043584BA25661A2A00762374 /* GCMarqueeItem.swift in Sources */,
+				04B4739F2574CFDC00CD2719 /* guijiViewController.swift in Sources */,
 				043584BB25661A2A00762374 /* GCMarqueeView.swift in Sources */,
 				043584A2256604DF00762374 /* CDFlowLayout.swift in Sources */,
 				040BA90E255BCE04002929D1 /* feedbackViewController.swift in Sources */,
@@ -539,6 +550,7 @@
 				0440FD8D254910450061E2C6 /* Utils.swift in Sources */,
 				041E1C8125485098007A751D /* AnalyticsViewController.swift in Sources */,
 				04B623ED256DF7E6008E5B27 /* HttpsRequest.swift in Sources */,
+				04B473A32574DF7400CD2719 /* YHTextView.swift in Sources */,
 				044D0C032565224100D22600 /* xieyiViewController.swift in Sources */,
 				045AABF9255BD241006CCFCE /* vipViewController.swift in Sources */,
 				04DAB5C0256764A500E32670 /* userInfoViewController.swift in Sources */,

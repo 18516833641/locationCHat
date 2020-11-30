@@ -22,10 +22,10 @@ class userInfoViewController: AnalyticsViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.init(red: 27/255, green: 39/255, blue: 85/255, alpha: 1)
         
-        let user = BmobUser.getCurrent()
+        let user = BmobUser.current()
         let niakname = user?.object(forKey: "nickName")
         if niakname == nil {
-            let user = BmobUser.getCurrent()?.mobilePhoneNumber.replacePhone()
+            let user = BmobUser.current()?.mobilePhoneNumber.replacePhone()
             
             textField.attributedPlaceholder = NSAttributedString.init(string:user!, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
         }else{
@@ -104,7 +104,7 @@ class userInfoViewController: AnalyticsViewController {
     @IBAction func centerAction(_ sender: Any) {
         
         if textField.text!.count > 1 {
-            let user = BmobUser.getCurrent()
+            let user = BmobUser.current()
             user!.setObject(textField.text, forKey: "nickName")
             user!.updateInBackground { (isSuccessful, error) in
 

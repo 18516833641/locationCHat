@@ -20,13 +20,6 @@ class locationViewController: AnalyticsViewController{
     //    var clousre : MKPositioningClosure?
     let locationManager = AMapLocationManager()
     
-    let option = AMapTrackManagerOptions()
-    var trackManagerCopy = AMapTrackManager()
-    
-    var serviceID = ""//服务id
-    var termiID = ""//设备id
-    var trackidID = ""//轨迹id
-    
     var userPhone = ""
     var nickName = ""
     
@@ -42,9 +35,6 @@ class locationViewController: AnalyticsViewController{
 
         //定位开启
         loactionAction()
-        
-        //创建轨迹服务
-        createServiceAction()
     
         setLeftNavigationButton()
         
@@ -67,8 +57,6 @@ class locationViewController: AnalyticsViewController{
         
         if vip as! String == "1" {//已经开通vip
             
-         
-            CreateTrackAction()
             
         }else if vip as! String == "0"{//未开通vip
            
@@ -132,9 +120,9 @@ class locationViewController: AnalyticsViewController{
     //MARK:我的轨迹
     @IBAction func myLoactionAction(_ sender: Any) {
 
-        startTrackServer()
-//        let vc = myLoactionViewController()
-//        self.navigationController?.pushViewController(vc, animated: false)
+//        startTrackServer()
+        let vc = guijiViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     //MARK:定位
@@ -165,209 +153,7 @@ class locationViewController: AnalyticsViewController{
 
 
     }
-    
-    //MARK:轨迹上传
-    func TrackAction() {
-        
-        
-        
-    }
-    
-    //MARK:创建服务
-    func createServiceAction() {
-        
-        let parameters = ["key":"d038b6c3e0793c5ac2e0d4d4d589b3f8" as AnyObject,//请求服务权限标识
-                     "name":"phone_Location_service" as AnyObject,//服务名称
-                     "desc":"手机定位轨迹回放标识符" as AnyObject]//服务描述
 
-        BKHttpTool.requestData(requestType: .Post, URLString: "https://tsapi.amap.com/v1/track/service/add", parameters: parameters) { (error, response) in
-
-
-            if error == nil , let data = response{
-
-                let json = JSON(data)
-                
-                if json["errcode"].stringValue == "20009" {//service已存在
-                    
-                    self.requestServiceAction()
-                    
-                }else{
-                    
-                    self.serviceID = json["data"]["sid"].stringValue
-                    self.CreateTrackAction()
-                    
-                }
-
-            }
-
-        } failured: { (error, response) in
-
-        }
-
-    }
-    
-    //MARK:查询serviceID是否存在
-    func requestServiceAction() {
-        
-        let param = ["key":"d038b6c3e0793c5ac2e0d4d4d589b3f8" as AnyObject]//请求服务权限标识
-
-        BKHttpTool.requestData(requestType: .Get, URLString: "https://tsapi.amap.com/v1/track/service/list", parameters: param) { (error, response) in
-
-
-            if error == nil , let data = response{
-
-                let json = JSON(data)
-
-                print("\(json)")
-
-                self.serviceID = json["data"]["results"][0]["sid"].stringValue
-                
-                self.creatTerminalID()
-                self.CreateTrackAction()
-
-                print("------------\(self.serviceID)")
-            }
-
-        } failured: { (error, response) in
-
-        }
-
-    }
-    
-    //MARK:创建终端服务id
-    func creatTerminalID() {
-        
-        let parameters = ["key":"d038b6c3e0793c5ac2e0d4d4d589b3f8" as AnyObject,//请求服务权限标识
-                     "sid":self.serviceID as AnyObject,//服务名称
-                     "name":userPhone as AnyObject,
-                     "desc":"终端" as AnyObject]//服务描述
-
-        BKHttpTool.requestData(requestType: .Post, URLString: "https://tsapi.amap.com/v1/track/terminal/add", parameters: parameters) { (error, response) in
-
-
-            if error == nil , let data = response{
-
-                let json = JSON(data)
-                
-                print("--------\(json)")
-                self.termiID = json["data"]["sid"].stringValue
-                
-//                if json["errcode"].stringValue == "20009" {//service已存在
-//
-//                    self.requestServiceAction()
-//
-//                }else{
-//
-//
-//                    self.CreateTrackAction()
-//
-//                }
-
-            }
-
-        } failured: { (error, response) in
-
-        }
-        
-    }
-    
-    
-    //MARK:开启轨迹服务
-    func startTrackServer() {
-        //开始服务
-        let serviceOption = AMapTrackManagerServiceOption()
-        serviceOption.terminalID = "15661004819"
-    
-        trackManagerCopy.startService(withOptions: serviceOption)
-        
-    }
-    
-    //MARK:关闭轨迹服务（先关闭轨迹采集，再关闭服务）
-    func stopTrackServer() {
-        //关闭轨迹采集
-        self.trackManagerCopy.stopGaterAndPack()
-        
-        //关闭轨迹服务
-        self.trackManagerCopy.stopService()
-        
-        self.trackManagerCopy.delegate = nil
-        
-    }
-    
-    //MARK:开始轨迹采集
-    func startTrackGather() {
-        let userDefault = UserDefaults.standard
-        let trackID = userDefault.object(forKey: "trackID") as? String
-        
-        if trackID == nil{
-            //轨迹id不存在，创建轨迹id
-            CreateTrackName()
-        }else{
-            //轨迹id已存在，直接开始采集
-            self.trackManagerCopy.startGatherAndPack()
-            
-            //上传轨迹
-            //这里轨迹已经开始采集成功，请求后台接口上传相关的数据
-        }
-
-        
-        
-    }
-    
-    //MARK:创建终端id
-    func CreateTrackAction() {
-        
-//        changeGatherAndPackTimeInterval
-        option.serviceID = self.serviceID
-        
-        
-        //初始化AMapTrackManager
-        let trackManager = AMapTrackManager.init(options: option)
-        trackManagerCopy = trackManager
-        trackManagerCopy.delegate = self
-    
-        //将定位信息采集周期设置为10s，上报周期设置为30s
-        trackManagerCopy.changeGatherAndPackTimeInterval(1, packTimeInterval: 3)
-//        trackManager.setLocalCacheMaxSize(50)//设定允许的本地缓存最大值
-        
-        //配置定位属性
-        trackManagerCopy.allowsBackgroundLocationUpdates = true//是否允许后台定位。
-        trackManagerCopy.pausesLocationUpdatesAutomatically = false//指定定位是否会被系统自动暂停。默认为NO。
-        
-        //查询终端是否存在
-        let request = AMapTrackQueryTerminalRequest()
-        request.serviceID = trackManagerCopy.serviceID
-        request.terminalID = "15661004819" //根据用户名创建终端id
-        
-        trackManagerCopy.aMapTrackQueryTerminal(request)
-        
-        
-        
-        
-    }
-    
-    
-    
-    //MARK:创建轨迹ID
-    func CreateTrackName() {
-        
-        if trackManagerCopy == nil {
-            
-            return
-        }
-        
-        print("创建轨迹id")
-        let request = AMapTrackAddTrackRequest()
-        request.serviceID = trackManagerCopy.serviceID
-        request.terminalID = trackManagerCopy.terminalID
-        trackManagerCopy.aMapTrackAddTrack(request)
-        
-    }
-    
-    
-   
-    
-    
     //MARK:获取当前时间
     func currentTime() -> String {
         let dateformatter = DateFormatter()
@@ -375,27 +161,11 @@ class locationViewController: AnalyticsViewController{
         // GMT时间 转字符串，直接是系统当前时间
         return dateformatter.string(from: Date())
     }
-    
-    @IBAction func chakanACtion(_ sender: Any) {
-        requestTrack()
-    }
-    //MARK:查询历史轨迹
-    func requestTrack() {
-        
-        let request = AMapTrackQueryTrackHistoryAndDistanceRequest()
-        
-        request.serviceID = self.trackManagerCopy.serviceID
-//        request.terminalID = self.trackManagerCopy.serviceID
-        let millisecond = Date().milliStamp
-        request.startTime = Int64(Int(millisecond)! - 12 * 60 * 60)
-        request.endTime = Int64(millisecond)!
-        self.trackManagerCopy.aMapTrackQueryTrackHistoryAndDistance(request)
-        
-    }
+
 
 }
 
-extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate,AMapTrackManagerDelegate{
+extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
     
     
     //MARK:MAMapViewDelegate
@@ -418,147 +188,14 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate,A
     
     func amapLocationManager(_ manager: AMapLocationManager!, didUpdate location: CLLocation!, reGeocode: AMapLocationReGeocode?) {
 
-//        print("-----坐标:\(location.coordinate.latitude)")
+        print("-----坐标:\(location.coordinate)")
         if let reGeocode = reGeocode {
             NSLog("reGeocode:%@", reGeocode)
             myLocation.text = reGeocode.formattedAddress
             myTime.text = currentTime()
         }
     }
-    
-    
-    //MARK:AMapTrackManagerDelegate
-    func amapTrackManager(_ manager: AMapTrackManager, doRequireTemporaryFullAccuracyAuth locationManager: CLLocationManager, completion: @escaping (Error) -> Void) {
-        
-    }
-    
-    //查询终端结果
-    func onQueryTerminalDone(_ request: AMapTrackQueryTerminalRequest, response: AMapTrackQueryTerminalResponse) {
-        
-        
-        print("=======\(response.terminals)")
-        
-        if response.terminals.count  > 0 {
-
-            //查询到结果，使用terminal ID
-            let terminalID = response.terminals.first?.tid
-            print("查询到结果======\(String(describing: terminalID))")
-            self.termiID = terminalID ?? ""
-
-            //启动轨迹上报服务
-            startTrackServer()
-        }else{
-
-            //查询结果为空，创建新的terminal
-            let addRequest = AMapTrackAddTrackRequest()
-            addRequest.serviceID = trackManagerCopy.serviceID
-            addRequest.terminalID = "15661004819"//根据用户名去创建id
-            trackManagerCopy.aMapTrackQueryTerminal(request)
-
-        }
-    }
-    
-    //创建终端结果
-    func onAddTerminalDone(_ request: AMapTrackAddTerminalRequest, response: AMapTrackAddTerminalResponse) {
-        //创建terminal成功
-        termiID = response.terminalID
-        
-        //启动上报服务(service id)
-        startTrackServer()
-        print("创建terminal成功，启动上报服务(service id)\(termiID)")
-    }
-    
-    //错误回调
-    func didFailWithError(_ error: Error, associatedRequest request: Any) {
-        
-        if request is AMapTrackQueryTerminalRequest{
-            print("查询参数错误\(error)")
-        }
-        if request is AMapTrackAddTrackRequest {
-            print("创建terminal失败\(error)")
-        }
-        if request is AMapTrackQueryTrackHistoryAndDistanceRequest {
-            print("查询历史轨迹失败\(error)")
-            
-        }
-    }
-    
-
-    //生成轨迹id
-    func onAddTrackDone(_ request: AMapTrackAddTrackRequest, response: AMapTrackAddTrackResponse) {
-        
-        print("onAddTrackDone\(response.formattedDescription())")
-        
-        if response.code == AMapTrackErrorCode.OK {
-            //创建trackID成功，开始采集
-            self.trackManagerCopy.trackID = response.trackID
-            
-            print("轨迹id------\(response.trackID)")
-            
-            //在巡检过程中杀死应用后，需要重启上报服务，但轨迹id被清空，不能继续开始轨迹采集，所以需要本地存储，巡检结束后删除
-            
-            let userDefault = UserDefaults.standard
-            userDefault.set(response.trackID, forKey: "trackID")
-            userDefault.synchronize()
-
-            
-            self.trackManagerCopy.startGatherAndPack()
-            
-            //上传轨迹
-            //这里轨迹已经开始采集成功，请求后台接口上传相关的数据
-            
-        }else{
-            
-            print("创建trackID失败")
-        }
-    }
-    
-    //查询轨迹历史数据和行驶距离回调函数
-    func onQueryTrackHistoryAndDistanceDone(_ request: AMapTrackQueryTrackHistoryAndDistanceRequest, response: AMapTrackQueryTrackHistoryAndDistanceResponse) {
-        print("查询历史轨迹\(response.formattedDescription())")
-    }
-    
-    //service 开启结果回调 开始Service回调
-    func onStartService(_ errorCode: AMapTrackErrorCode) {
-        if errorCode == AMapTrackErrorCode.OK {
-//            trackManagerCopy.startGatherAndPack()
-            startTrackServer()
-            print("开始轨迹服务成功")
-            
-            //服务成功后，开始轨迹采集
-            startTrackGather()
-            
-        }else{
-            print("开始轨迹服务失败")
-        }
-    }
-    func onStopService(_ errorCode: AMapTrackErrorCode) {
-        if errorCode == AMapTrackErrorCode.OK {
-            print("关闭轨迹服务成功")
-        }else{
-            print("关闭轨迹服务失败")
-        }
-    }
-    
-    
-    //gather 开始轨迹采集和上传回调
-    func onStartGatherAndPack(_ errorCode: AMapTrackErrorCode) {
-        if errorCode == AMapTrackErrorCode.OK {
-            print("开始轨迹采集成功")
-        }else{
-            print("开始轨迹采集失败")
-        }
-    }
-    
-    //gather 关闭轨迹采集和上传回调
-    func onStopGatherAndPack(_ errorCode: AMapTrackErrorCode) {
-        if errorCode == AMapTrackErrorCode.OK {
-            print("关闭轨迹采集成功")
-        }else{
-            print("关闭轨迹采集失败")
-        }
-    }
-
+  
 }
 
 
