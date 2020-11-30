@@ -29,7 +29,6 @@ class homeViewController: AnalyticsViewController {
     @IBAction func addAction(_ sender: Any) {
         let vc = addFriendViewController()
         vc.title = "添加关心的人"
-        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
