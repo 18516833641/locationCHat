@@ -57,6 +57,7 @@ class loginViewController: AnalyticsViewController {
             user.mobilePhoneNumber = loginUser.text//手机号
             user.setObject("0", forKey: "vip")//vip
             user.setObject("0", forKey: "cancel")//是否注销账户
+            user.setObject(loginUser.text, forKey: "nickName")//vip
             user.signUpOrLoginInbackground(withSMSCode: loginPass.text) { (isSuccessful, error) in
                 if error == nil{
                     

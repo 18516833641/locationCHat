@@ -168,7 +168,7 @@ class locationViewController: AnalyticsViewController{
         mapView.delegate = self
         mapView.showsCompass = false
         mapView.showsScale = false
-        mapView.zoomLevel = 13
+        mapView.zoomLevel = 10
         mapView.userTrackingMode = .follow
         mapView.isShowsUserLocation = true
         self.view.addSubview(mapView)
@@ -266,7 +266,6 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
                 //进行操作
                 let vip = user?.object(forKey: "vip")
                 userPhone = user?.mobilePhoneNumber ?? ""
-                nickName = user?.object(forKey: "nickName") as! String
                 if vip as! String == "1" {//已经开通vip
                     
                     //开通会员开始开启轨迹

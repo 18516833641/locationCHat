@@ -710,6 +710,7 @@
 				CODE_SIGN_ENTITLEMENTS = LocationChat/LocationChat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = S5EHJK76M6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LocationChat/Info.plist;
@@ -723,6 +724,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/LocationChat/third",
 				);
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Objc",
@@ -789,6 +791,7 @@
 				CODE_SIGN_ENTITLEMENTS = LocationChat/LocationChat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = S5EHJK76M6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LocationChat/Info.plist;
@@ -802,6 +805,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/LocationChat/third",
 				);
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Objc",

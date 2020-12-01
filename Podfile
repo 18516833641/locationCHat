@@ -14,6 +14,7 @@ pod 'AMap2DMap' #高德地图
 pod 'AMapTrack' #高德轨迹
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'WMZDialog'
     
 use_frameworks!
 

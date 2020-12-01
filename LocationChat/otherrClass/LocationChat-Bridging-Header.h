@@ -27,3 +27,6 @@
 
 #import <BmobSDK/Bmob.h>
 
+#import "WMZDialog.h"//弹窗
+
+

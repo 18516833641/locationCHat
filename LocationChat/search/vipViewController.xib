@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -150,7 +150,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iK-vm-mPC">
-                                    <rect key="frame" x="20" y="533.5" width="374" height="186.5"/>
+                                    <rect key="frame" x="20" y="533.5" width="374" height="158"/>
                                     <string key="text">付费声明：
 
 1.苹果付费：用户使用苹果设备确认购买并付款后计入iTunes账户；
@@ -158,8 +158,7 @@
 2.取消苹果续订：如需取消续订，请在当前订阅周期到期前24小时以前，手动在iTunes/Apple ID设置管理中关闭自动续费功能，到期前24小时内取消，将会取消订阅费用；
 
 3.苹果续费：苹果iTunes账户会在到期前24小时内扣费，扣费成功后订阅周期顺延一个订阅周期；
-
-4.定位说明：我们的APP需要双方安装并在对方同意下添加好友，好友同意后即可查询对方位置信息。</string>
+</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -200,6 +199,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" red="0.054901960780000002" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="1jL-U8-9ph" secondAttribute="bottom" id="Ckt-7b-jfw"/>
                         <constraint firstAttribute="bottom" secondItem="1jL-U8-9ph" secondAttribute="bottom" id="FnL-KA-S3w"/>

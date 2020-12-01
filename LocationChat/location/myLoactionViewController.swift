@@ -17,7 +17,17 @@ fileprivate struct Metric {
 
 class myLoactionViewController: AnalyticsViewController {
     
+    var location = ""
+    
+    var latitude:Double = 0.0
+    var longitude:Double = 0.0
+    
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var startTimeBut: UIButton!
+    @IBOutlet weak var endTimeBut: UIButton!
+    
+    var startTimeLab = ""
+    var sendTimeLab = ""
     
     let trackMapView = MKMapView(frame: UIScreen.main.bounds)
     var trackArr = Array<String>()
@@ -37,49 +47,122 @@ class myLoactionViewController: AnalyticsViewController {
         // Do any additional setup after loading the view.
         self.title = "我的轨迹"
         
-        loactionAction()
-        
-        self.view.bringSubviewToFront(topView)
-        
-        
-//        self.nameArr.removeAll()
-//        self.addressArr.removeAll()
-//        self.objectID.removeAll()
-//        
-//        let user = BmobUser.current()
-//            
-//        let query:BmobQuery = BmobQuery(className: "friend" + user!.mobilePhoneNumber)
-//            query.findObjectsInBackground { (array, error) in
-//                for i in 0..<array!.count{
-//                    let obj = array?[i] as! BmobObject
-//                    
-//                    self.nameArr.append(obj.object(forKey: "userPhone") as? String ?? "")
-//                    self.addressArr.append(obj.object(forKey: "location") as? String ?? "")
-//                    self.objectID.append(obj.object(forKey: "objectId") as? String ?? "")
-////                    print("-------- \(self.nameArr + self.addressArr))")
-//           
-//               }
-//                self.tableView.reloadData()
-//           }
-        
-    }
-
-    @IBAction func startTimeAction(_ sender: Any) {
-    }
-    
-    @IBAction func endTimeAction(_ sender: Any) {
-        
-    }
-    
-    @IBAction func myLoactionAction(_ sender: Any) {
-        trackPlayback()
-    }
-    //MARK:定位方法
-    func loactionAction() {
-        
         trackMapView.delegate = self
         view.addSubview(trackMapView)
-        trackArr = sporttrailDetails.components(separatedBy: ",")
+        
+        self.view.bringSubviewToFront(topView)
+
+        
+        
+    }
+    
+    func apiLocaton() {
+
+        let user = BmobUser.current()
+
+        let query:BmobQuery = BmobQuery(className: "Locat" + user!.mobilePhoneNumber)
+            query.findObjectsInBackground { (array, error) in
+                for i in 0..<array!.count{
+                    let obj = array?[i] as! BmobObject
+                    self.latitude = obj.object(forKey: "latitude") as! Double
+                    self.longitude = obj.object(forKey: "longitude") as! Double
+                    
+                    self.location = String(self.latitude) + "|" + String(self.longitude)
+                    
+                    self.trackArr.append(self.location)
+                
+//                    print("======\(self.latitude) + \(self.longitude)")
+                        print("-------- \(self.trackArr)")
+
+               }
+                
+                self.loactionAction()
+                
+//                self.tableView.reloadData()
+           }
+        
+//
+    }
+    
+    
+
+    //MARK:开始时间
+    @IBAction func startTimeAction(_ sender: Any) {
+    
+        Dialog()
+            
+        .wDateTimeTypeSet()("yyyy-MM-dd HH:mm")
+        .wTypeSet()(DialogTypeDatePicker)
+        .wOKColorSet()(UIColor.lightGray)
+        .wCancelColorSet()(UIColor.lightGray)
+        .wShadowAlphaSet()(0.3)
+        .wStart()
+        
+        .wEventOKFinishSet()(){ anyid,otherData in
+           
+           print("\(otherData as! String)")
+
+           self.startTimeLab = otherData as! String
+
+           self.startTimeBut.setTitle((otherData as! String), for: .normal)
+
+        }
+        
+    }
+    
+    //MARK:结束时间
+    @IBAction func endTimeAction(_ sender: Any) {
+        
+        Dialog()
+            
+        .wDateTimeTypeSet()("yyyy-MM-dd HH:mm")
+        .wTypeSet()(DialogTypeDatePicker)
+        .wOKColorSet()(UIColor.lightGray)
+        .wCancelColorSet()(UIColor.lightGray)
+        .wShadowAlphaSet()(0.3)
+        .wStart()
+        
+        .wEventOKFinishSet()(){ anyid,otherData in
+           
+           print("\(otherData as! String)")
+
+            self.sendTimeLab = otherData as! String
+
+           self.endTimeBut.setTitle((otherData as! String), for: .normal)
+
+        }
+        
+    }
+    
+    //MARK:开始轨迹回放
+    @IBAction func myLoactionAction(_ sender: Any) {
+        
+        if startTimeLab.isEmpty {
+            SVProgressHUD.show(withStatus: "请选择开始时间")
+            SVProgressHUD.dismiss(withDelay: 1)
+            
+            return
+        }
+        if sendTimeLab.isEmpty {
+            SVProgressHUD.show(withStatus: "请选择结束时间")
+            SVProgressHUD.dismiss(withDelay: 1)
+            return
+        }
+        
+        trackArr.removeAll()
+
+        apiLocaton()
+        
+        
+        
+    }
+    
+    
+    //MARK:画线方法
+    func loactionAction() {
+
+
+        print("\(trackArr)")
         
         var maxX = 0.0
         var minX = 0.0
@@ -117,7 +200,7 @@ class myLoactionViewController: AnalyticsViewController {
         circle.title = "opaque1"
         trackMapView.insertOverlay(circle, at: 0)
         self.circle = circle
-        
+        trackPlayback()
     }
 
     //添加轨迹动画
@@ -162,6 +245,11 @@ class myLoactionViewController: AnalyticsViewController {
     }
     //手动隐藏动画
     func touchHiddenAnnotation() {
+        
+        if coordinates.first == nil {
+            return
+        }
+        
         if onceUseAnnotation {
             return
         } else {
@@ -277,5 +365,3 @@ extension myLoactionViewController: MKMapViewDelegate {
         return polylineRenderer as MKOverlayRenderer
     }
 }
-
-fileprivate let sporttrailDetails = "22.5544151627497|113.951851439363,22.5535714862551|113.951547026838,22.5544687886934|113.951605530715,22.5534893283866|113.951303951808,22.5535706880443|113.951220108493,22.5545477473901|113.950947559891,22.5546416545603|113.95095889657,22.5547295025474|113.950913998889,22.5548382690131|113.95091492902,22.5549186553884|113.950979057649,22.5549751646696|113.951071973507,22.5550676811827|113.951101187634,22.5551614216347|113.951112944033,22.5552543804109|113.951132338195,22.5553245541544|113.951050676975,22.555392157642|113.950983703863,22.5554881307141|113.950979429436,22.5555598455818|113.950914387195,22.5556196325934|113.950836418999,22.5556616313978|113.950727395586,22.555665585723|113.950624832874,22.5556730209966|113.950523194038,22.5556832992982|113.950417611114,22.5556714562396|113.95031647549,22.5556387148476|113.950223815773,22.5556106616742|113.950105474581,22.5556074903475|113.950001403311,22.5555732344395|113.949905135797,22.5555723529856|113.949792421002,22.5555722130222|113.949694981494,22.5555869391869|113.949590325621,22.555609940444|113.949495238325,22.5556349535737|113.949399983676,22.5556795580749|113.949314214247,22.5556745036623|113.949210062314,22.5557042965689|113.949115144788,22.5556866810235|113.949017539043,22.5556710635165|113.948912212777,22.5556501001366|113.948817041436,22.5556577901162|113.94871331207,22.5556754024763|113.948603289534,22.5557026657276|113.948498974867,22.5557328843463|113.948406242154,22.5558001950213|113.948103959197,22.5558375366996|113.948009214354,22.5560106147961|113.947715670803,22.5560859167113|113.947659700892,22.5559799071197|113.947394592514,22.5558881782236|113.94735816588,22.5558062218428|113.947301851183,22.5557079730601|113.947275830184,22.5556096641066|113.947263152256,22.5555332782706|113.947204488423,22.555445594422|113.947179978728,22.5553544743166|113.947155804514,22.5552639465105|113.947134735332,22.5551716426857|113.947104770747,22.5550825176537|113.947071030096,22.554960990677|113.94703552517,22.5548689903445|113.947035015841,22.5547737770457|113.947042646332,22.5546831079059|113.94703643068,22.5545931394807|113.947023501655,22.5545023593617|113.947001845152,22.5544159754344|113.946953671014,22.5543456190044|113.946891064219"

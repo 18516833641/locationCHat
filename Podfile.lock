@@ -29,6 +29,7 @@ PODS:
   - Spring (1.0.6)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (5.0.0)
+  - WMZDialog (1.1.8)
 
 DEPENDENCIES:
   - Alamofire
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - Spring (from `https://github.com/MengTo/Spring.git`)
   - SVProgressHUD (~> 2.2.5)
   - SwiftyJSON
+  - WMZDialog
 
 SPEC REPOS:
   trunk:
@@ -58,6 +60,7 @@ SPEC REPOS:
     - SDWebImage
     - SVProgressHUD
     - SwiftyJSON
+    - WMZDialog
 
 EXTERNAL SOURCES:
   Spring:
@@ -82,7 +85,8 @@ SPEC CHECKSUMS:
   Spring: 3d113f14575ef79aec9c5f906dfa4f5001c03254
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  WMZDialog: 3ebb67bf9e0c9469b948f4271126d24db73734b6
 
-PODFILE CHECKSUM: 2d5a228cb616587dd7e7b7aa8cbf663b76c78101
+PODFILE CHECKSUM: 4acd9505843686d251a0ef2c97dc596801cb3ebb
 
 COCOAPODS: 1.10.0

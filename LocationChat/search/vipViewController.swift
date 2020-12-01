@@ -44,7 +44,13 @@ class vipViewController: AnalyticsViewController {
 
 
     @IBAction func payAction(_ sender: Any) {
+        
+        SVProgressHUD.show(withStatus: "商品未配置")
+        SVProgressHUD.dismiss(withDelay: 1)
     
+        
+//        return
+        
         let user = BmobUser.current()
         user?.setObject("1", forKey: "vip")
         user?.updateInBackground { (isSuccessful, error) in
