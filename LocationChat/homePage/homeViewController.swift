@@ -72,13 +72,14 @@ class homeViewController: AnalyticsViewController {
         
         let user = BmobUser.current()
         
-        let address = user?.object(forKey: "location") as? String
+//        let address = user?.object(forKey: "location") as? String
         
         if user != nil {
             //进行操作
             let vip = user?.object(forKey: "vip")
             
             if vip as! String == "1" {//已经开通vip
+                
                 
                 
             }else if vip as! String == "0"{//未开通vip

@@ -41,6 +41,27 @@ class myLoactionViewController: AnalyticsViewController {
         
         self.view.bringSubviewToFront(topView)
         
+        
+//        self.nameArr.removeAll()
+//        self.addressArr.removeAll()
+//        self.objectID.removeAll()
+//        
+//        let user = BmobUser.current()
+//            
+//        let query:BmobQuery = BmobQuery(className: "friend" + user!.mobilePhoneNumber)
+//            query.findObjectsInBackground { (array, error) in
+//                for i in 0..<array!.count{
+//                    let obj = array?[i] as! BmobObject
+//                    
+//                    self.nameArr.append(obj.object(forKey: "userPhone") as? String ?? "")
+//                    self.addressArr.append(obj.object(forKey: "location") as? String ?? "")
+//                    self.objectID.append(obj.object(forKey: "objectId") as? String ?? "")
+////                    print("-------- \(self.nameArr + self.addressArr))")
+//           
+//               }
+//                self.tableView.reloadData()
+//           }
+        
     }
 
     @IBAction func startTimeAction(_ sender: Any) {
