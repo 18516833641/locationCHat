@@ -45,6 +45,15 @@ class AnalyticsViewController: UIViewController {
         return .lightContent
     }
     
+    //MARK:获取当前时间
+    func currentTime() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "YYYY-MM-dd HH:mm"// 自定义时间格式
+        // GMT时间 转字符串，直接是系统当前时间
+        return dateformatter.string(from: Date())
+    }
+    
+    //MARK:判断手机号
     func isTelNumber(num:String)->Bool
     {
        let mobile = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$"

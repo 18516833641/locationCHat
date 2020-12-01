@@ -40,16 +40,6 @@ class guijiViewController: AnalyticsViewController {
         trackPlayback()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        locationManager.startUpdatingLocation()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-//        locationManager.stopUpdatingLocation()
-
-    }
-    
     //MARK:定位方法
     func loactionAction() {
         

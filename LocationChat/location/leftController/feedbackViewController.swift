@@ -21,6 +21,7 @@ class feedbackViewController: AnalyticsViewController {
 
     @IBAction func downAction(_ sender: Any) {
         
+        
         guard let textView = textView.text,textView.count > 1 else {
             SVProgressHUD.showError(withStatus: "输入您的建议或者意见！")
             SVProgressHUD.dismiss(withDelay: 0.75)
@@ -46,10 +47,11 @@ class feedbackViewController: AnalyticsViewController {
                 //创建成功后会返回objectId，updatedAt，createdAt等信息
                 //创建对象成功，打印对象值
                 if let game = gamescore {
-                    print("save success \(game)")
+//                    print("save success \(game)")
                     
-                    SVProgressHUD.show(withStatus: "感谢您的反馈！")
+                    SVProgressHUD.show(withStatus: "提交成功，感谢您的反馈！")
                     SVProgressHUD.dismiss(withDelay: 0.75)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }

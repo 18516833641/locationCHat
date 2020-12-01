@@ -15,6 +15,8 @@ class addFriendViewController: AnalyticsViewController {
     
     @IBOutlet weak var textField: UITextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,10 +31,11 @@ class addFriendViewController: AnalyticsViewController {
         
         
         let user = BmobUser.current()
+        let userPhone = user?.mobilePhoneNumber ?? ""
         
         if !isTelNumber(num: textField.text ?? "") {
                 
-            SVProgressHUD.showError(withStatus: "请输入手机号")
+            SVProgressHUD.showError(withStatus: "请输入正确的手机号")
             SVProgressHUD.dismiss(withDelay: 0.75)
             return
         }
@@ -45,55 +48,79 @@ class addFriendViewController: AnalyticsViewController {
         
         if user != nil {
             
-            
-//            let user  = obj as! BmobUser
+            let vip = user?.object(forKey: "vip")
+            if vip as! String == "1" {//已经开通vip
+                
+                let query = BmobUser.query()
+                query?.whereKey("username", equalTo: textField.text)
+                query?.findObjectsInBackground { (array, error) in
 
-            let gamescore:BmobObject = BmobObject(className: "friend" + user!.mobilePhoneNumber)
-            
-            gamescore.setObject("friend", forKey: "between")
-            
-            gamescore.setObject(user!.object(forKey: "location"), forKey: "location")
-         
-            gamescore.setObject(self.textField.text, forKey: "userPhone")
-            
-            gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
-                if error != nil{
-                    //发生错误后的动作
-                    print("error is \(error?.localizedDescription)")
-                }else{
-                    //创建成功后会返回objectId，updatedAt，createdAt等信息
-                    //创建对象成功，打印对象值
-                    if let game = gamescore {
-                        print("save success \(game)")
-                        SVProgressHUD.show(withStatus: "添加好友成功")
-                        SVProgressHUD.dismiss(withDelay: 0.75)
-                        self.navigationController?.popViewController(animated: true)
+                    if error != nil{
+    //                    print("========\(error)")
+                    }else{
+
+                        if array?.count == 0 {
+
+                            SVProgressHUD.showError(withStatus: "输入的用户不存在")
+                            SVProgressHUD.dismiss(withDelay: 0.75)
+                        }
+
+                        for obj in array! as Array {
+                            
+                            let user  = obj as! BmobUser
+                            
+                            let gamescore:BmobObject = BmobObject(className: "friend" + userPhone)
+                            
+                            gamescore.setObject("friend", forKey: "between")
+                            
+                            gamescore.setObject(user.object(forKey: "location"), forKey: "location")
+                         
+                            gamescore.setObject(user.mobilePhoneNumber, forKey: "userPhone")
+                            
+                            gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
+                                if error != nil{
+                                    //发生错误后的动作
+                                    SVProgressHUD.showError(withStatus: "添加好友失败，好友已存在")
+                                    SVProgressHUD.dismiss(withDelay: 0.75)
+                                }else{
+                                    //创建成功后会返回objectId，updatedAt，createdAt等信息
+                                    //创建对象成功，打印对象值
+                                    if let game = gamescore {
+                                        print("save success \(game)")
+                                        SVProgressHUD.show(withStatus: "添加好友成功")
+                                        SVProgressHUD.dismiss(withDelay: 0.75)
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                }
+                            }
+
+
+
+
+                            }
+                        }
                     }
-                }
+                
+            }else if vip as! String == "0"{//未开通vip
+            
+                let alertView = SmileAlert(title: "赶快去解锁吧", message: "位置变动提醒.\n实时定位和轨迹移动提醒.\n一键报警.", cancelButtonTitle: "取 消", sureButtonTitle: "确 定")
+                        alertView.show()
+                        //获取点击事件
+                        alertView.clickIndexClosure { (index) in
+                            print("点击了第" + "\(index)" + "个按钮")
+                            
+                            if(index == 2){
+                                let vc = vipViewController()
+                                vc.title = "解锁特权"
+                                self.navigationController?.pushViewController(vc, animated: false)
+                                alertView.dismiss()
+                            }
+                            
+                        }
+               
             }
             
-//            let query = BmobUser.query()
-//            query?.whereKey("username", equalTo: textField.text)
-//            query?.findObjectsInBackground { (array, error) in
-//
-//                if error != nil{
-////                    print("========\(error)")
-//                }else{
-//
-//                    if array?.count == 0 {
-//
-//                        SVProgressHUD.showError(withStatus: "输入的用户不存在")
-//                        SVProgressHUD.dismiss(withDelay: 0.75)
-//                    }
-//
-//                    for obj in array! as Array {
-//
-//
-//
-//
-//                        }
-//                    }
-//                }
+            
 //
                 
         }else{

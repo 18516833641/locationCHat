@@ -48,7 +48,6 @@ class locationViewController: AnalyticsViewController{
         
         // 启用计时器，控制每秒执行一次tickDown方法
 //        timer = Timer.scheduledTimer(timeInterval: 10,target:self,selector:#selector(tickDown),userInfo:nil,repeats:true)
-        
         let user = BmobUser.current()
         
         if user != nil {
@@ -63,14 +62,13 @@ class locationViewController: AnalyticsViewController{
             }else if vip as! String == "0"{//未开通vip
             
                 
+                
                
             }
         }else{
             //对象为空时，可打开用户注册界面
             
         }
-        
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,13 +182,7 @@ class locationViewController: AnalyticsViewController{
 
     }
 
-    //MARK:获取当前时间
-    func currentTime() -> String {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "YYYY-MM-dd HH:mm"// 自定义时间格式
-        // GMT时间 转字符串，直接是系统当前时间
-        return dateformatter.string(from: Date())
-    }
+    
 
 
 }
@@ -223,7 +215,30 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
             NSLog("reGeocode:%@", reGeocode)
             myLocation.text = reGeocode.formattedAddress
             myTime.text = currentTime()
-            updateLocation()
+            
+            
+            let user = BmobUser.current()
+            
+            if user != nil {
+                updateLocation()
+                //进行操作
+                let vip = user?.object(forKey: "vip")
+                userPhone = user?.mobilePhoneNumber ?? ""
+                nickName = user?.object(forKey: "nickName") as! String
+                if vip as! String == "1" {//已经开通vip
+                    
+                    
+                    
+                }else if vip as! String == "0"{//未开通vip
+                
+                    
+                    
+                   
+                }
+            }else{
+                //对象为空时，可打开用户注册界面
+                
+            }
         }
     }
   
@@ -309,7 +324,7 @@ extension locationViewController:LeftViewControllerDelegate{
         case 4:do {//关于我们
             
             let vc = xieyiViewController()
-            
+            self.title = "关于我们"
             self.navigationController?.pushViewController(vc, animated: false)
     
                 

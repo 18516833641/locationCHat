@@ -45,7 +45,19 @@ class vipViewController: AnalyticsViewController {
 
     @IBAction func payAction(_ sender: Any) {
     
-        
+        let user = BmobUser.current()
+        user?.setObject("1", forKey: "vip")
+        user?.updateInBackground { (isSuccessful, error) in
+            
+            if(isSuccessful){
+                
+                print("恭喜您开通会员")
+                
+            }else{
+                print("====\(error)")
+            }
+
+        }
         
     }
     
