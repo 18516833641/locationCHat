@@ -1,49 +1,49 @@
 {
   "images" : [
     {
-      "filename" : "1024-1024_03@2x.png",
+      "filename" : "ditu-2.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "1024-1024_03@3x.png",
+      "filename" : "ditu-1.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "1024-1024_03@2x-1.png",
+      "filename" : "ditu.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "1024-1024_03@3x-1.png",
+      "filename" : "ditu87.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "1024-1024_03@2x-2.png",
+      "filename" : "ditu80.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "1024-1024_03@3x-2.png",
+      "filename" : "ditu120-121.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "1024-1024_03@2x-3.png",
+      "filename" : "ditu120-120.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "1024-1024_03@3x-3.png",
+      "filename" : "ditu180.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -94,7 +94,7 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "5d3a6015d250f_03.png",
+      "filename" : "ditu-3.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
