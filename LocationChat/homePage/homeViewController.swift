@@ -57,57 +57,34 @@ class homeViewController: AnalyticsViewController {
     
     func quertLocation() {
         
-        //查找GameScore表
-        
         let user = BmobUser.current()
-
-        let userPhone = user?.mobilePhoneNumber ?? ""
-
-       
-        let query:BmobQuery = BmobQuery(className: "location")
-        query.whereKey("userPhone", notEqualTo: userPhone)
-        
-
-        query.findObjectsInBackground { (array, error) in
+        if user != nil {
             
-            
-        if error != nil {
-            //进行错误处理
-            print("======\(error)")
+        let query:BmobQuery = BmobQuery(className: "friend" + user!.mobilePhoneNumber)
+            query.findObjectsInBackground { (array, error) in
+                for i in 0..<array!.count{
+                    let obj = array?[i] as! BmobObject
+                    
+//                    let playerName = obj.object(forKey: "playerName") as? String
+           
+                   print("playerName \(obj)")
+           
+               }
+           }
+
+                
         }else{
-            for i in 0..<array!.count{
-                let obj = array![i] as! BmobObject
-                let name = obj.object(forKey: "userPhone")
-                //打印名字
-                print("userPhone----------- \(name)")
-            }
-        }
-            
+            //对象为空时，可打开用户注册界面
+            BmobUser.logout()
+            let vc = loginViewController()
+            vc.title = "登录"
+            self.navigationController?.pushViewController(vc, animated: false)
             
         }
         
-//        query.getObjectInBackground(withId: "5b3c5d4b881") { (obj, error) in
-//                if error != nil {
-//                    //进行错误处理
-//                    print("======\(error)")
-//                }else{
-//                    if obj != nil{
-//                        //得到playerName和cheatMode
-//
-//
-//                        let playerName = obj?.object(forKey: "location") as? String
-//                        let cheatMode  = obj?.object(forKey: "cheatMode") as? Bool
-//                        print("playerName \(playerName),cheatMode \(cheatMode)")
-//                        //打印objectId,createdAt,updatedAt
-//                        print("objectid   \(obj?.objectId)")
-//                        print("createdAt  \(obj?.createdAt)")
-//                        print("updatedAt  \(obj?.updatedAt)")
-//                    }
-//                }
-//            }
         
-    }
     
+}
 }
 
 extension homeViewController:UITableViewDelegate,UITableViewDataSource{
@@ -148,5 +125,15 @@ extension homeViewController:UITableViewDelegate,UITableViewDataSource{
 //        self.navigationController?.pushViewController(vc, animated: true)
 //        
     }
-   
+    
+   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            return true;
+    }
+        
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+              print("-------")
+        }
+
+   }
 }

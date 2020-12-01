@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,6 +40,12 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_addLine" translatesAutoresizingMaskIntoConstraints="NO" id="uWH-4E-GHi">
+                    <rect key="frame" x="30" y="399.5" width="354" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="IPw-vC-Qom"/>
+                    </constraints>
+                </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入想要查询的手机号" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePX-VG-lpy">
                     <rect key="frame" x="60" y="349.5" width="294" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,42 +56,50 @@
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ka-JT-xS4">
-                    <rect key="frame" x="107" y="489.5" width="200" height="40"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buttonback" translatesAutoresizingMaskIntoConstraints="NO" id="ARo-sW-bIX">
+                    <rect key="frame" x="60" y="481.5" width="294" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="1vb-5y-LR8"/>
-                        <constraint firstAttribute="width" constant="200" id="zW9-0R-wzR"/>
+                        <constraint firstAttribute="height" constant="40" id="DLG-X4-jeO"/>
                     </constraints>
-                    <state key="normal" image="home_addButton"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kj5-HC-V9b">
+                    <rect key="frame" x="60" y="481.5" width="294" height="40"/>
+                    <state key="normal" title="添加好友">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
-                        <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="11X-We-7Gh"/>
+                        <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="5Ep-gE-jTx"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_addLine" translatesAutoresizingMaskIntoConstraints="NO" id="uWH-4E-GHi">
-                    <rect key="frame" x="30" y="399.5" width="354" height="2"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="2" id="IPw-vC-Qom"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="JgL-0s-zFl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="00i-c0-6yY"/>
                 <constraint firstItem="uWH-4E-GHi" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" constant="-60" id="3bq-6f-bTh"/>
+                <constraint firstItem="ARo-sW-bIX" firstAttribute="top" secondItem="uWH-4E-GHi" secondAttribute="bottom" constant="80" id="3gJ-Yi-Dk7"/>
                 <constraint firstItem="ePX-VG-lpy" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" constant="-120" id="4kd-e7-nq2"/>
+                <constraint firstItem="ARo-sW-bIX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="8gY-W0-A6i"/>
                 <constraint firstItem="ucf-vx-bkg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="CsW-ZM-cVd"/>
+                <constraint firstItem="kj5-HC-V9b" firstAttribute="centerX" secondItem="ARo-sW-bIX" secondAttribute="centerX" id="D4w-GS-fco"/>
                 <constraint firstItem="BkN-bp-wZ9" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="GL9-aX-QHR"/>
                 <constraint firstItem="ePX-VG-lpy" firstAttribute="top" secondItem="ucf-vx-bkg" secondAttribute="bottom" constant="60" id="KSQ-MC-D73"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="JgL-0s-zFl" secondAttribute="bottom" constant="-44" id="Loh-jl-rEp"/>
                 <constraint firstItem="uWH-4E-GHi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="PZK-iP-oSr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JgL-0s-zFl" secondAttribute="trailing" id="QUJ-Yk-rKS"/>
+                <constraint firstItem="kj5-HC-V9b" firstAttribute="height" secondItem="ARo-sW-bIX" secondAttribute="height" id="Rfz-OW-Jy6"/>
                 <constraint firstItem="BkN-bp-wZ9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="SqQ-mw-SLW"/>
-                <constraint firstItem="6ka-JT-xS4" firstAttribute="top" secondItem="ePX-VG-lpy" secondAttribute="bottom" constant="100" id="YcX-TJ-WTy"/>
+                <constraint firstItem="kj5-HC-V9b" firstAttribute="width" secondItem="ARo-sW-bIX" secondAttribute="width" id="aRU-Dc-Ou4"/>
+                <constraint firstItem="kj5-HC-V9b" firstAttribute="centerY" secondItem="ARo-sW-bIX" secondAttribute="centerY" id="aRW-W2-cLG"/>
                 <constraint firstItem="uWH-4E-GHi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bc5-hu-kJl"/>
-                <constraint firstItem="6ka-JT-xS4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ec2-Gi-XNd"/>
                 <constraint firstItem="ucf-vx-bkg" firstAttribute="top" secondItem="BkN-bp-wZ9" secondAttribute="bottom" constant="60" id="ldI-HD-a0B"/>
                 <constraint firstItem="ucf-vx-bkg" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="mYr-VC-teQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ARo-sW-bIX" secondAttribute="trailing" constant="60" id="nK0-9c-FJE"/>
                 <constraint firstItem="uWH-4E-GHi" firstAttribute="top" secondItem="ePX-VG-lpy" secondAttribute="bottom" constant="10" id="oaw-4J-ulb"/>
                 <constraint firstItem="JgL-0s-zFl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pCz-fd-qtL"/>
                 <constraint firstItem="BkN-bp-wZ9" firstAttribute="centerX" secondItem="JgL-0s-zFl" secondAttribute="centerX" id="pqy-qf-1HQ"/>
@@ -95,7 +109,7 @@
         </view>
     </objects>
     <resources>
-        <image name="home_addButton" width="227" height="39"/>
+        <image name="buttonback" width="439" height="56"/>
         <image name="home_addFriend" width="375" height="667"/>
         <image name="home_addLine" width="213" height="1"/>
         <systemColor name="systemBackgroundColor">

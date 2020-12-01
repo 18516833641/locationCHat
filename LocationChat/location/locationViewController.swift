@@ -50,21 +50,26 @@ class locationViewController: AnalyticsViewController{
 //        timer = Timer.scheduledTimer(timeInterval: 10,target:self,selector:#selector(tickDown),userInfo:nil,repeats:true)
         
         let user = BmobUser.current()
-
-        let vip = user?.object(forKey: "vip")
-        userPhone = user?.mobilePhoneNumber ?? ""
-        nickName = user?.object(forKey: "nickName") as! String
         
-        if vip as! String == "1" {//已经开通vip
+        if user != nil {
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            userPhone = user?.mobilePhoneNumber ?? ""
+            nickName = user?.object(forKey: "nickName") as! String
             
+            if vip as! String == "1" {//已经开通vip
+                
+                
+            }else if vip as! String == "0"{//未开通vip
             
-        }else if vip as! String == "0"{//未开通vip
-           
-//            CreateServiceAction()
-           
+                
+               
+            }
+        }else{
+            //对象为空时，可打开用户注册界面
+            
         }
         
-//        updateObjectJSONField()
        
     }
     
@@ -77,69 +82,28 @@ class locationViewController: AnalyticsViewController{
         locationManager.stopUpdatingLocation()
 
     }
-    
-    func addLocation() {
-        
 
-        let gamescore:BmobObject = BmobObject(className: userPhone)
-        
-        gamescore.setObject(myLocation.text, forKey: "location")
-        
-        gamescore.setObject(userPhone, forKey: "userPhone")
-        
-        gamescore.setObject(myTime.text, forKey: "LocationTime")
-        
-        gamescore.setObject(nickName, forKey: "nickName")
-        
-        gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
-            if error != nil{
-                //发生错误后的动作
-                print("error is \(String(describing: error?.localizedDescription))")
-            }else{
-                //创建成功后会返回objectId，updatedAt，createdAt等信息
-                //创建对象成功，打印对象值
-                if let game = gamescore {
-                    print("-----save success \(game)")
-                    
-                }
-            }
-        }
-    }
-    
-    
     func updateLocation(){
-      
         
-//        let gamescore:BmobObject = BmobObject(className: "location")
-        let gamescore:BmobObject = BmobObject(className: "location")
-    
-        gamescore.setObject(myLocation.text, forKey: "location")
+        let user = BmobUser.current()
         
-        gamescore.setObject(userPhone, forKey: "userPhone")
-        
-        gamescore.setObject(myTime.text, forKey: "LocationTime")
-        
-        gamescore.setObject(nickName, forKey: "nickName")
-        gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
-            if error != nil{
-                //发生错误后的动作
-                print("error is-------- \(error?.localizedDescription)")
-            }else{
-                //创建对象成功，打印对象值
-                //创建成功后会返回objectId，updatedAt，createdAt等信息
-                if let game = gamescore {
-                    print("save success \(game)")
-//                    game.setObject(110, forKey: "score")
-                    game.updateInBackground(resultBlock: { (isSuccessful, error) in
-                        if isSuccessful {
-                            print("update successfully");
-                        }else{
-                            print("update error is========== \(error?.localizedDescription)")
-                        }
-                    })
+        if user != nil {
+            //进行操作
+            user?.setObject(myLocation.text, forKey: "location")
+            user?.setObject(myTime.text, forKey: "LocationTime")
+            user?.updateInBackground { (isSuccessful, error) in
+
+                if(isSuccessful){
+                    print("=====")
+                }else{
+                    print("-----")
                 }
             }
+        }else{
+            //对象为空时，可打开用户注册界面
         }
+        
+      
     }
     
     /**
@@ -259,7 +223,6 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
             NSLog("reGeocode:%@", reGeocode)
             myLocation.text = reGeocode.formattedAddress
             myTime.text = currentTime()
-//            addLocation()
             updateLocation()
         }
     }

@@ -33,9 +33,9 @@ class feedbackViewController: AnalyticsViewController {
 
         
         let gamescore:BmobObject = BmobObject(className: "feedback")
-        //score为1200
+
         gamescore.setObject(textView, forKey: "feedback")
-        //设置playerName为小明
+
         gamescore.setObject(userPhone, forKey: "userPhone")
         
         gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
