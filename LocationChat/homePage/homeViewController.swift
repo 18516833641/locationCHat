@@ -36,11 +36,11 @@ class homeViewController: AnalyticsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        nickName.font = UIFont(name: "Helvetica-Bold", size: 15)
         let user = BmobUser.current()
         if user != nil {
             
-            nickName.text = user?.object(forKey: "nickName") as? String
+//            nickName.text = user?.object(forKey: "nickName") as? String
             time.text = user?.object(forKey: "LocationTime") as? String
             address.text = user?.object(forKey: "location") as? String
             quertLocation()

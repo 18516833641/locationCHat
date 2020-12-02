@@ -48,6 +48,7 @@ class myLoactionViewController: AnalyticsViewController {
         self.title = "我的轨迹"
         
         trackMapView.delegate = self
+//        trackMapView.zoomLevel = 9
         view.addSubview(trackMapView)
         
         self.view.bringSubviewToFront(topView)
@@ -364,4 +365,30 @@ extension myLoactionViewController: MKMapViewDelegate {
         polylineRenderer.lineJoin = .round
         return polylineRenderer as MKOverlayRenderer
     }
+}
+
+extension  MKMapView  {
+     //缩放级别
+     var  zoomLevel:  Int  {
+         //获取缩放级别
+         get  {
+             return  Int (log2(360 * ( Double ( self .frame.size.width/256)
+                 /  self .region.span.longitudeDelta)) + 1)
+         }
+         //设置缩放级别
+         set  (newZoomLevel){
+             setCenterCoordinate(coordinate:  self .centerCoordinate, zoomLevel: newZoomLevel,
+                                 animated:  false )
+         }
+     }
+     
+     //设置缩放级别时调用
+     private  func  setCenterCoordinate(coordinate:  CLLocationCoordinate2D , zoomLevel:  Int ,
+                                      animated:  Bool ){
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 360 / pow(2,  Double (zoomLevel)) *  Double ( self .frame.size.width) / 256)
+        setRegion( MKCoordinateRegion (center: centerCoordinate, span: span), animated: animated)
+        
+    
+     }
 }

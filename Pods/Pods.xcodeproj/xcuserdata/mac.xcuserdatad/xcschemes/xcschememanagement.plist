@@ -39,6 +39,16 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>BMKLocationKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>BaiduMapKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
 		<key>BmobSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>

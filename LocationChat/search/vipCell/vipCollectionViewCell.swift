@@ -16,7 +16,7 @@ class vipCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        money.font = UIFont(name: "Helvetica-Bold", size: 30)
+        money.font = UIFont(name: "Helvetica-Bold", size: 15)
     }
 
 }

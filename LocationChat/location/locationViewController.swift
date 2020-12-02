@@ -15,9 +15,14 @@ class locationViewController: AnalyticsViewController{
  
     @IBOutlet weak var topView: UIView!
     
+    @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var myName: UILabel!
     @IBOutlet weak var myTime: UILabel!
     @IBOutlet weak var myLocation: UILabel!
     //    var clousre : MKPositioningClosure?
+    
+    @IBOutlet weak var textField: UITextField!
     let locationManager = AMapLocationManager()
     
     var userPhone = ""
@@ -34,7 +39,7 @@ class locationViewController: AnalyticsViewController{
         super.viewDidLoad()
         
         self.title = "手机定位"
-
+        myName.font = UIFont(name: "Helvetica-Bold", size: 15)
         //定位开启
         loactionAction()
     
@@ -47,6 +52,7 @@ class locationViewController: AnalyticsViewController{
         vc.delegate = self
         
         self.view.bringSubviewToFront(topView)
+        self.view.bringSubviewToFront(searchView)
 
     }
     
@@ -114,7 +120,9 @@ class locationViewController: AnalyticsViewController{
         self.navigationController?.pushViewController(vc, animated: false)
         
     }
-    
+    //MARK:搜索
+    @IBAction func searchButAction(_ sender: Any) {
+    }
     //MARK:我的轨迹
     @IBAction func myLoactionAction(_ sender: Any) {
 
@@ -168,7 +176,10 @@ class locationViewController: AnalyticsViewController{
         mapView.delegate = self
         mapView.showsCompass = false
         mapView.showsScale = false
-        mapView.zoomLevel = 10
+        mapView.zoomLevel = 16
+        mapView.maxZoomLevel = 17
+        mapView.minZoomLevel = 11
+//        mapView.
         mapView.userTrackingMode = .follow
         mapView.isShowsUserLocation = true
         self.view.addSubview(mapView)
@@ -180,6 +191,7 @@ class locationViewController: AnalyticsViewController{
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.locationTimeout = 10
         locationManager.reGeocodeTimeout = 10
+//        locationManager.enablePulseAnnimation = true
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.locatingWithReGeocode = true
         if UIDevice.current.systemVersion._bridgeToObjectiveC().doubleValue >= 9.0 {
