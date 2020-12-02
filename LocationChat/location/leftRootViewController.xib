@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,20 +69,39 @@
                                         <constraint firstAttribute="width" constant="12" id="cui-4J-tyT"/>
                                     </constraints>
                                 </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VIP" translatesAutoresizingMaskIntoConstraints="NO" id="dee-ex-H7P">
+                                    <rect key="frame" x="60" y="123" width="20" height="10"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="10" id="of7-vf-QcE"/>
+                                        <constraint firstAttribute="width" constant="20" id="vTm-m1-ovM"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wangguan" translatesAutoresizingMaskIntoConstraints="NO" id="iDx-wc-S1f">
+                                    <rect key="frame" x="15" y="78" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="Cms-Jq-RHf"/>
+                                        <constraint firstAttribute="height" constant="20" id="fmp-v3-qTu"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" red="0.10588235294117647" green="0.15294117647058825" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
+                                <constraint firstItem="iDx-wc-S1f" firstAttribute="top" secondItem="0cN-ni-lgl" secondAttribute="top" constant="-5" id="6Lv-nx-kkW"/>
                                 <constraint firstItem="OZK-V2-OcI" firstAttribute="centerY" secondItem="9VW-6E-yBB" secondAttribute="centerY" id="9EV-V1-za5"/>
                                 <constraint firstItem="0cN-ni-lgl" firstAttribute="leading" secondItem="9VW-6E-yBB" secondAttribute="leading" constant="20" id="HKb-Um-jQs"/>
+                                <constraint firstItem="dee-ex-H7P" firstAttribute="bottom" secondItem="0cN-ni-lgl" secondAttribute="bottom" id="IZe-En-0uw"/>
                                 <constraint firstAttribute="height" constant="166" id="QJ3-tm-kd8"/>
                                 <constraint firstItem="RnP-R1-VyJ" firstAttribute="trailing" secondItem="BZP-D9-p9l" secondAttribute="trailing" constant="20" id="R6s-4W-hTO"/>
                                 <constraint firstItem="0cN-ni-lgl" firstAttribute="centerY" secondItem="9VW-6E-yBB" secondAttribute="centerY" constant="25" id="UtB-lE-mSk"/>
                                 <constraint firstItem="OZK-V2-OcI" firstAttribute="width" secondItem="9VW-6E-yBB" secondAttribute="width" id="Zid-EH-9tI"/>
                                 <constraint firstItem="BZP-D9-p9l" firstAttribute="centerY" secondItem="0cN-ni-lgl" secondAttribute="centerY" id="fgr-CD-PT9"/>
                                 <constraint firstItem="RnP-R1-VyJ" firstAttribute="centerY" secondItem="BZP-D9-p9l" secondAttribute="centerY" id="g0V-eC-eAX"/>
+                                <constraint firstItem="dee-ex-H7P" firstAttribute="trailing" secondItem="0cN-ni-lgl" secondAttribute="trailing" constant="10" id="iFK-q5-Yzz"/>
                                 <constraint firstItem="OZK-V2-OcI" firstAttribute="centerX" secondItem="9VW-6E-yBB" secondAttribute="centerX" id="p2c-t0-Xwt"/>
                                 <constraint firstItem="BZP-D9-p9l" firstAttribute="leading" secondItem="0cN-ni-lgl" secondAttribute="leading" constant="60" id="pRH-RP-sbU"/>
                                 <constraint firstItem="OZK-V2-OcI" firstAttribute="height" secondItem="9VW-6E-yBB" secondAttribute="height" id="pwA-p2-6jm"/>
+                                <constraint firstItem="iDx-wc-S1f" firstAttribute="leading" secondItem="0cN-ni-lgl" secondAttribute="leading" constant="-5" id="xdB-wP-2oQ"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JrY-ig-Vij">
@@ -122,7 +141,9 @@
         </view>
     </objects>
     <resources>
+        <image name="VIP" width="128" height="128"/>
         <image name="right_back" width="128" height="128"/>
         <image name="user_header" width="128" height="128"/>
+        <image name="wangguan" width="128" height="128"/>
     </resources>
 </document>

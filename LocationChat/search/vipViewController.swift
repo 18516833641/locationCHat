@@ -124,10 +124,13 @@ extension vipViewController : UICollectionViewDelegate , UICollectionViewDataSou
         conllectionView.selectItem(at: defaultSelectCell, animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
         
         let dataMoney = ["¥ 68","¥ 168","¥ 268"]
-        let dataTitle = ["月卡会员（折合¥0.67/天）","季卡会员（折合¥0.67/天）","年卡会员（折合¥0.67/天）"]
+        let dataTitle = ["月卡会员","季卡会员","年卡会员"]
+        let vipImage = ["vip_v1","vip_v2","vip_v3"]
+        
         
         cell.money.text = dataMoney[indexPath.row]
         cell.title.text = dataTitle[indexPath.row]
+        cell.vipIcon.image = UIImage(named: vipImage[indexPath.row])
         
         print(cell.bounds.size.height)
         return cell

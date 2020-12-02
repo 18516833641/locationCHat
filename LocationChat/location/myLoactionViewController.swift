@@ -95,6 +95,7 @@ class myLoactionViewController: AnalyticsViewController {
         .wDateTimeTypeSet()("yyyy-MM-dd HH:mm")
         .wTypeSet()(DialogTypeDatePicker)
         .wOKColorSet()(UIColor.lightGray)
+//            .wTitle("开始时间")
         .wCancelColorSet()(UIColor.lightGray)
         .wShadowAlphaSet()(0.3)
         .wStart()
@@ -117,6 +118,8 @@ class myLoactionViewController: AnalyticsViewController {
         Dialog()
             
         .wDateTimeTypeSet()("yyyy-MM-dd HH:mm")
+//             = "结束时间"
+//            .wTitle
         .wTypeSet()(DialogTypeDatePicker)
         .wOKColorSet()(UIColor.lightGray)
         .wCancelColorSet()(UIColor.lightGray)
