@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class vipViewController: AnalyticsViewController {
 
@@ -22,12 +23,18 @@ class vipViewController: AnalyticsViewController {
     let CELL_WIDTH : CGFloat = (UIScreen.main.bounds.width-40)*3/4
     let CELL_HEIGHT : CGFloat = UIScreen.main.bounds.height*0.2
     
+    var observer : StoreObserver? //内购监听器
+    var prouctNmaeArray = [String]() //
+    var productIdArray = [String]() //存放内购产品
+    var putchaseArray = [SKProduct]() //存放内购产品
+    var selectedProduct : SKProduct? //选中的产品
+    
+    var select = 1 //选择的商品编号
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-
-//        vipMoney.font = UIFont(name: "Helvetica-Bold", size: 30)
         let token:Bool = (UserDefaults.string(forKey: .vip) != nil)
         
         if token == true {
@@ -40,30 +47,79 @@ class vipViewController: AnalyticsViewController {
         
         paomadengAction()
         
+        
+        
+        
+        //内购
+        self.observer = StoreObserver.shareStoreObserver()
+        self.observer?.create()
+        
+        //内购数据
+        self.prouctNmaeArray = ["68","168","268"]
+        self.productIdArray = ["2020120230","2020120290","20201202365"] //产品id
+        //获取所有的商品
+        self.observer?.requestProductDataWithIds(productIds: self.productIdArray)
+        
+        //内购之后的状态--产品加载完成
+        NotificationCenter.default.addObserver(self, selector: #selector(productsLoaded(nofi:)), name: NSNotification.Name(rawValue: ProductsLoadedSucessNotification), object: nil)
+        //内购之后的状态--产品交易完成
+        NotificationCenter.default.addObserver(self, selector: #selector(productPurchased(nofi:)), name: NSNotification.Name(rawValue: "ProductPurchased"), object: nil)
+        //内购之后的状态--产品交易失败
+        NotificationCenter.default.addObserver(self, selector: #selector(productPurchaseFailed(nofi:)), name: NSNotification.Name(rawValue: "ProductPurchaseFailed"), object: nil)
+        //内购之后的状态--产品交易恢复
+        NotificationCenter.default.addObserver(self, selector: #selector(productRestored(nofi:)), name: NSNotification.Name(rawValue: "ProductRestore"), object: nil)
+        
     }
-
+    //销毁
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        self.observer?.destroy()
+    }
 
     @IBAction func payAction(_ sender: Any) {
         
-        SVProgressHUD.show(withStatus: "商品未配置")
-        SVProgressHUD.dismiss(withDelay: 1)
+        print("========\(select)")
+        
+        SVProgressHUD.showInfo(withStatus: "购买过程与Apple商城链接有关，请耐心等待，避免购买错误")
+        SVProgressHUD.dismiss(withDelay: 1.75)
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.8) {
+//            SVProgressHUD.show()
+        }
+        
+        let tagIndex = (sender as AnyObject).tag + select
+        
+        print("tagIndex======\(tagIndex)")
+        print("putchaseArray======\(putchaseArray)")
+        print("prouctNmaeArray======\(prouctNmaeArray)")
+        print("productIdArray======\(productIdArray)")
+        print("putchaseArray======\(putchaseArray)")
+        print("selectedProduct======\(selectedProduct)")
+        
+       self.observer?.buyProduct(product: self.putchaseArray[tagIndex])
+        
+//        payButton.isHidden = true
+//
+//        SVProgressHUD.show(withStatus: "商品未配置")
+//        SVProgressHUD.dismiss(withDelay: 1)
+        
+        
     
         
 //        return
         
-        let user = BmobUser.current()
-        user?.setObject("1", forKey: "vip")
-        user?.updateInBackground { (isSuccessful, error) in
-            
-            if(isSuccessful){
-                
-                print("恭喜您开通会员")
-                
-            }else{
-                print("====\(error)")
-            }
-
-        }
+//        let user = BmobUser.current()
+//        user?.setObject("1", forKey: "vip")
+//        user?.updateInBackground { (isSuccessful, error) in
+//
+//            if(isSuccessful){
+//
+//                print("恭喜您开通会员")
+//
+//            }else{
+//                print("====\(error)")
+//            }
+//
+//        }
         
     }
     
@@ -107,6 +163,53 @@ class vipViewController: AnalyticsViewController {
         conllectionView.showsHorizontalScrollIndicator = false
         conllectionView.reloadData()
     }
+    
+    
+    //实现通知监听方法---产品加载完成
+     @objc func productsLoaded(nofi : Notification){
+        print("产品加载完成")
+         
+         self.putchaseArray = nofi.object  as! [SKProduct]
+         weak var weakSelf = self //避免循环引用
+          DispatchQueue.main.async {
+//             weakSelf?.layountBtn()
+         }
+        
+     }
+     
+     //实现通知监听方法---支付成功 并且第一次验证成功
+     @objc func productPurchased(nofi : Notification) {
+   
+        //和后台服务器交接
+        print("实现通知监听方法---支付成功 并且第一次验证成功")
+     }
+     
+     //实现通知监听方法---- 失败
+     @objc func  productFail(nofi : Notification) {
+         
+     }
+    
+     //实现通知监听方法---- 重新购买
+     @objc func  productRestored(nofi : Notification) {
+         
+            
+     }
+     
+     //实现通知监听方法---- 失败
+     @objc func  productPurchaseFailed(nofi : Notification) {
+        
+        print("交易失败")
+         
+        let  code = nofi.userInfo!["code"] as! String
+        
+        let alertController = UIAlertController(title: "温馨提示",message: code,preferredStyle: .alert)
+        let sureAction = UIAlertAction(title: "确定", style: .default, handler: {
+            action in
+        })
+        alertController.addAction(sureAction)
+        self.present(alertController, animated: true, completion: nil)
+         
+     }
 
 }
 
@@ -135,8 +238,15 @@ extension vipViewController : UICollectionViewDelegate , UICollectionViewDataSou
         print(cell.bounds.size.height)
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("点击图片\(indexPath.row)")
-        
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print("点击图片\(indexPath.row)")
+//        select = indexPath.row
+//    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pInView = self.view.convert(self.conllectionView.center, to: self.conllectionView)
+        let indexPathNow = self.conllectionView.indexPathForItem(at: pInView)!
+        print("=------\(indexPathNow.row)")
+        select = indexPathNow.row
     }
 }

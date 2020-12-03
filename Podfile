@@ -10,11 +10,11 @@ pod 'MMDrawerController'
 pod 'BmobSDK', '~> 2.4.1' 
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
 pod 'AMapLocation' # 高德定位
-pod 'AMap2DMap' #高德地图
-pod 'AMapTrack' #高德轨迹
+pod 'AMap2DMap'
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'WMZDialog'
+pod 'SwiftyStoreKit'
     
 use_frameworks!
 

@@ -5,9 +5,6 @@ PODS:
   - AMapFoundation (1.6.5.1)
   - AMapLocation (2.6.7):
     - AMapFoundation (~> 1.6.4)
-  - AMapTrack (1.4.0):
-    - AMapFoundation (~> 1.6.4)
-    - AMapLocation (~> 2.6.7)
   - BmobSDK (2.4.1)
   - IQKeyboardManager (6.4.2)
   - MJRefresh (3.2.3)
@@ -29,13 +26,13 @@ PODS:
   - Spring (1.0.6)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (5.0.0)
+  - SwiftyStoreKit (0.16.1)
   - WMZDialog (1.1.8)
 
 DEPENDENCIES:
   - Alamofire
   - AMap2DMap
   - AMapLocation
-  - AMapTrack
   - BmobSDK (~> 2.4.1)
   - IQKeyboardManager (~> 6.4.0)
   - MJRefresh (~> 3.2.0)
@@ -44,6 +41,7 @@ DEPENDENCIES:
   - Spring (from `https://github.com/MengTo/Spring.git`)
   - SVProgressHUD (~> 2.2.5)
   - SwiftyJSON
+  - SwiftyStoreKit
   - WMZDialog
 
 SPEC REPOS:
@@ -52,7 +50,6 @@ SPEC REPOS:
     - AMap2DMap
     - AMapFoundation
     - AMapLocation
-    - AMapTrack
     - BmobSDK
     - IQKeyboardManager
     - MJRefresh
@@ -60,6 +57,7 @@ SPEC REPOS:
     - SDWebImage
     - SVProgressHUD
     - SwiftyJSON
+    - SwiftyStoreKit
     - WMZDialog
 
 EXTERNAL SOURCES:
@@ -76,7 +74,6 @@ SPEC CHECKSUMS:
   AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
   AMapFoundation: b67560a6f21aab81c8c12f84616b55a3833b6253
   AMapLocation: a46c30d9930d0f3a3bd21139d8f845d10ac3f01d
-  AMapTrack: 0e23672ef7234b86f95ec1c4f50bf48166e2cd0d
   BmobSDK: 930525437e6602f7146108e11a9796604a1edbb9
   IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
   MJRefresh: 2b1214a2dc8f4df4c5dcb028ea2ad4e245425fb7
@@ -85,8 +82,9 @@ SPEC CHECKSUMS:
   Spring: 3d113f14575ef79aec9c5f906dfa4f5001c03254
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   WMZDialog: 3ebb67bf9e0c9469b948f4271126d24db73734b6
 
-PODFILE CHECKSUM: 4acd9505843686d251a0ef2c97dc596801cb3ebb
+PODFILE CHECKSUM: a46fdd4cf481f0f9e9182a9dbb0cc1671843d10f
 
 COCOAPODS: 1.10.0

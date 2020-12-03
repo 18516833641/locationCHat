@@ -62,6 +62,7 @@
 		046E71CE254FB47300E45F8C /* leftRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E71CC254FB47300E45F8C /* leftRootViewController.swift */; };
 		046E71CF254FB47300E45F8C /* leftRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046E71CD254FB47300E45F8C /* leftRootViewController.xib */; };
 		04731F262568DB510039A41A /* SmileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04731F252568DB510039A41A /* SmileAlert.swift */; };
+		0478A34625779EA00052EA53 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478A34525779EA00052EA53 /* StoreObserver.swift */; };
 		04AB12B7255CBBC00060F30C /* HttpAddressUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB12B3255CBBBF0060F30C /* HttpAddressUtil.swift */; };
 		04B4739F2574CFDC00CD2719 /* guijiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4739D2574CFDC00CD2719 /* guijiViewController.swift */; };
 		04B473A02574CFDC00CD2719 /* guijiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4739E2574CFDC00CD2719 /* guijiViewController.xib */; };
@@ -133,6 +134,7 @@
 		046E71CC254FB47300E45F8C /* leftRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leftRootViewController.swift; sourceTree = "<group>"; };
 		046E71CD254FB47300E45F8C /* leftRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = leftRootViewController.xib; sourceTree = "<group>"; };
 		04731F252568DB510039A41A /* SmileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileAlert.swift; sourceTree = "<group>"; };
+		0478A34525779EA00052EA53 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
 		04AB12B3255CBBBF0060F30C /* HttpAddressUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpAddressUtil.swift; sourceTree = "<group>"; };
 		04B4739D2574CFDC00CD2719 /* guijiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guijiViewController.swift; sourceTree = "<group>"; };
 		04B4739E2574CFDC00CD2719 /* guijiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = guijiViewController.xib; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		041E1C782548505F007A751D /* otherrClass */ = {
 			isa = PBXGroup;
 			children = (
+				0478A34525779EA00052EA53 /* StoreObserver.swift */,
 				0440FD8C254910450061E2C6 /* Utils.swift */,
 				041E1C8F254850F1007A751D /* LocationChat-Bridging-Header.h */,
 				044D0BFA2564B63500D22600 /* LoginUserInfo.swift */,
@@ -379,7 +382,7 @@
 				041E1C5C25484FA1007A751D /* Frameworks */,
 				041E1C5D25484FA1007A751D /* Resources */,
 				9CB91591E60D27A8F79089FE /* [CP] Embed Pods Frameworks */,
-				B42F079F22F57B2E4B7CCA0D /* [CP] Copy Pods Resources */,
+				E7957C076844A6EC334EB968 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -500,7 +503,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LocationChat/Pods-LocationChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B42F079F22F57B2E4B7CCA0D /* [CP] Copy Pods Resources */ = {
+		E7957C076844A6EC334EB968 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -547,6 +550,7 @@
 				04AB12B7255CBBC00060F30C /* HttpAddressUtil.swift in Sources */,
 				044D0BFB2564B63500D22600 /* LoginUserInfo.swift in Sources */,
 				0440FDCB25495B450061E2C6 /* friendTableViewCell.swift in Sources */,
+				0478A34625779EA00052EA53 /* StoreObserver.swift in Sources */,
 				0440FD8D254910450061E2C6 /* Utils.swift in Sources */,
 				041E1C8125485098007A751D /* AnalyticsViewController.swift in Sources */,
 				04B623ED256DF7E6008E5B27 /* HttpsRequest.swift in Sources */,

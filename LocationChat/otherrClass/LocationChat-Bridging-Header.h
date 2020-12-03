@@ -14,7 +14,7 @@
 //MARK:高得地图
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-#import <AMapTrackKit/AMapTrackKit.h>
+//#import <AMapTrackKit/AMapTrackKit.h>
 //#import <AMapSearchKit/AMapSearchKit.h>
 #import <MAMapKit/MAMapKit.h>
 
