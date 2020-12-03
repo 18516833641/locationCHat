@@ -206,7 +206,6 @@
 		041E1C782548505F007A751D /* otherrClass */ = {
 			isa = PBXGroup;
 			children = (
-				0478A34525779EA00052EA53 /* StoreObserver.swift */,
 				0440FD8C254910450061E2C6 /* Utils.swift */,
 				041E1C8F254850F1007A751D /* LocationChat-Bridging-Header.h */,
 				044D0BFA2564B63500D22600 /* LoginUserInfo.swift */,
@@ -235,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				043584A42566088D00762374 /* vipCell */,
+				0478A34525779EA00052EA53 /* StoreObserver.swift */,
 				041E1CA4254851CE007A751D /* searchViewController.swift */,
 				041E1CA5254851CE007A751D /* searchViewController.xib */,
 				045AABF7255BD241006CCFCE /* vipViewController.swift */,

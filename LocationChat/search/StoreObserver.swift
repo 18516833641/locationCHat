@@ -135,6 +135,8 @@ class StoreObserver: NSObject,SKProductsRequestDelegate, SKPaymentTransactionObs
     
     //交易完成在这里完成苹果验证
     func completeTransaction(transaction:SKPaymentTransaction){
+        
+        SVProgressHUD.showInfo(withStatus: "正在验证，请稍等")
 //        let environmentStr = String(data: transaction, encoding: .utf8)
          // 验证凭据，获取到苹果返回的交易凭据
          // appStoreReceiptURL iOS7.0增加的，购买交易完成后，会将凭据存放在该地址

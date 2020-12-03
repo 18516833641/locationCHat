@@ -122,12 +122,6 @@ class locationViewController: AnalyticsViewController{
     }
     //MARK:搜索
     @IBAction func searchButAction(_ sender: Any) {
-    }
-    //MARK:我的轨迹
-    @IBAction func myLoactionAction(_ sender: Any) {
-
-//        startTrackServer()
-    
         
         let user = BmobUser.current()
         
@@ -137,35 +131,52 @@ class locationViewController: AnalyticsViewController{
             userPhone = user?.mobilePhoneNumber ?? ""
             nickName = user?.object(forKey: "nickName") as! String
             
-            if vip as! String == "1" {//已经开通vip
+            if vip as! Int == 0 {//未开通vip
                 
+                pushVipControllent()
+                
+            }else {//已开通
+                
+                //添加好友
+                addFriend()
+            
+            }
+        }else{
+            //对象为空时，可打开用户注册界面
+            let vc = loginViewController()
+            vc.title = "登录"
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        
+    }
+    //MARK:我的轨迹
+    @IBAction func myLoactionAction(_ sender: Any) {
+        
+        let user = BmobUser.current()
+        
+        if user != nil {
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            userPhone = user?.mobilePhoneNumber ?? ""
+            nickName = user?.object(forKey: "nickName") as! String
+            
+            if vip as! Int == 0 {//已经开通vip
+                
+                pushVipControllent()
+                
+            }else{//未开通vip
+            
                 //跳转我的轨迹查询自己的轨迹
                 let vc = myLoactionViewController()
                 
                 self.navigationController?.pushViewController(vc, animated: false)
                 
-            }else if vip as! String == "0"{//未开通vip
-            
-                let alertView = SmileAlert(title: "赶快去解锁吧", message: "位置变动提醒.\n实时定位和轨迹移动提醒.\n一键报警.", cancelButtonTitle: "取 消", sureButtonTitle: "确 定")
-                        alertView.show()
-                        //获取点击事件
-                        alertView.clickIndexClosure { (index) in
-                            print("点击了第" + "\(index)" + "个按钮")
-                            
-                            if(index == 2){
-                                let vc = vipViewController()
-                                vc.title = "解锁特权"
-                                self.navigationController?.pushViewController(vc, animated: false)
-                                alertView.dismiss()
-                            }
-                            
-                        }
-                
-               
             }
         }else{
             //对象为空时，可打开用户注册界面
-            
+            let vc = loginViewController()
+            vc.title = "登录"
+            self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     
@@ -231,6 +242,68 @@ class locationViewController: AnalyticsViewController{
             }
         }
     }
+    
+    func addFriend() {
+        
+        let user = BmobUser.current()
+        let userPhone = user?.mobilePhoneNumber ?? ""
+        
+        let query = BmobUser.query()
+        query?.whereKey("username", equalTo: textField.text)
+        query?.findObjectsInBackground { (array, error) in
+
+            if error != nil{
+//                    print("========\(error)")
+            }else{
+
+                if array?.count == 0 {
+
+                    SVProgressHUD.showError(withStatus: "输入的用户不存在")
+                    SVProgressHUD.dismiss(withDelay: 0.75)
+                    return
+                }
+
+                for obj in array! as Array {
+                    
+                    let user  = obj as! BmobUser
+                    
+                    let gamescore:BmobObject = BmobObject(className: "friend" + userPhone)
+                    
+                    gamescore.setObject("friend", forKey: "between")
+                    
+                    gamescore.setObject(user.object(forKey: "location"), forKey: "location")
+                 
+                    gamescore.setObject(user.mobilePhoneNumber, forKey: "userPhone")
+                    
+                    gamescore.saveInBackground { [weak gamescore] (isSuccessful, error) in
+                        
+                        if error != nil{
+                            //发生错误后的动作
+                            SVProgressHUD.showError(withStatus: "添加好友失败，好友已存在")
+                            SVProgressHUD.dismiss(withDelay: 0.75)
+                        }else{
+                            //创建成功后会返回objectId，updatedAt，createdAt等信息
+                            //创建对象成功，打印对象值
+                            if let game = gamescore {
+                                print("save success \(game)")
+                                SVProgressHUD.show(withStatus: "添加好友成功")
+                                SVProgressHUD.dismiss(withDelay: 0.75)
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
+                        self.textField.text = ""
+                        let vc = homeViewController()
+                        self.navigationController?.pushViewController(vc, animated: false)
+                    }
+
+
+
+
+                    }
+                }
+            }
+        
+    }
 
 
 }
@@ -264,11 +337,14 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
         
         longitude = location.coordinate.longitude
         
+        
+        
         if let reGeocode = reGeocode {
             NSLog("reGeocode:%@", reGeocode)
             myLocation.text = reGeocode.formattedAddress
             myTime.text = currentTime()
-            
+            UserDefaults.set(value: myLocation.text ?? "", forKey: UserDefaults.LoginInfo.address)
+            UserDefaults.set(value: myTime.text ?? "", forKey: UserDefaults.LoginInfo.time)
             
             let user = BmobUser.current()
             
@@ -278,15 +354,14 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
                 //进行操作
                 let vip = user?.object(forKey: "vip")
                 userPhone = user?.mobilePhoneNumber ?? ""
-                if vip as! String == "1" {//已经开通vip
+                if vip as! Int == 0 {//未开通vip
                     
+                   
+                    
+                }else{//已经开通vip
+                
                     //开通会员开始开启轨迹
                     addlocation()
-                    
-                }else if vip as! String == "0"{//未开通vip
-                
-                    
-                    
                    
                 }
             }else{
@@ -413,7 +488,7 @@ extension locationViewController:LeftViewControllerDelegate{
         case 888:do{
             
             
-            let user = BmobUser.getCurrent()
+            let user = BmobUser.current()
             
             if user == nil {
                 

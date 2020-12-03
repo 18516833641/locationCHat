@@ -34,13 +34,27 @@ class vipViewController: AnalyticsViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let token:Bool = (UserDefaults.string(forKey: .vip) != nil)
         
-        if token == true {
-            vipLabel.text = "已开通vip"
+//        payButton.isHidden = true
+        
+        let user = BmobUser.current()
+        
+        if user != nil {
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            
+            if vip as! Int == 0 {//未开通vip
+                
+                vipLabel.text = "未开通vip"
+               
+            }else{//已开通vip
+                
+                vipLabel.text = "已开通vip"
+                
+               
+            }
         }else{
-            vipLabel.text = "未开通vip"
+           
         }
         
         setUICollectionView()
@@ -48,6 +62,7 @@ class vipViewController: AnalyticsViewController {
         paomadengAction()
         
         
+        SVProgressHUD.show(withStatus: "产品加载中...")
         
         
         //内购
@@ -78,48 +93,41 @@ class vipViewController: AnalyticsViewController {
 
     @IBAction func payAction(_ sender: Any) {
         
-        print("========\(select)")
         
-        SVProgressHUD.showInfo(withStatus: "购买过程与Apple商城链接有关，请耐心等待，避免购买错误")
-        SVProgressHUD.dismiss(withDelay: 1.75)
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.8) {
-//            SVProgressHUD.show()
+        let user = BmobUser.current()
+        
+//        let address = user?.object(forKey: "location") as? String
+        
+        if user != nil {
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            
+            if vip as! Int == 0 {//未开通vip
+                
+                SVProgressHUD.showInfo(withStatus: "购买过程与Apple商城链接有关，请耐心等待，避免购买错误")
+                SVProgressHUD.dismiss(withDelay: 1.75)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1.8) {
+        //            SVProgressHUD.show()
+                }
+                
+                payButton.isHidden = true
+                let tagIndex = (sender as AnyObject).tag + select
+                
+               self.observer?.buyProduct(product: self.putchaseArray[tagIndex])
+                
+                
+            }else{//已开通vip
+                
+                
+                
+               
+            }
+        }else{
+            //对象为空时，可打开用户注册界面
+            let vc = loginViewController()
+            vc.title = "登录"
+            self.navigationController?.pushViewController(vc, animated: false)
         }
-        
-        let tagIndex = (sender as AnyObject).tag + select
-        
-        print("tagIndex======\(tagIndex)")
-        print("putchaseArray======\(putchaseArray)")
-        print("prouctNmaeArray======\(prouctNmaeArray)")
-        print("productIdArray======\(productIdArray)")
-        print("putchaseArray======\(putchaseArray)")
-        print("selectedProduct======\(selectedProduct)")
-        
-       self.observer?.buyProduct(product: self.putchaseArray[tagIndex])
-        
-//        payButton.isHidden = true
-//
-//        SVProgressHUD.show(withStatus: "商品未配置")
-//        SVProgressHUD.dismiss(withDelay: 1)
-        
-        
-    
-        
-//        return
-        
-//        let user = BmobUser.current()
-//        user?.setObject("1", forKey: "vip")
-//        user?.updateInBackground { (isSuccessful, error) in
-//
-//            if(isSuccessful){
-//
-//                print("恭喜您开通会员")
-//
-//            }else{
-//                print("====\(error)")
-//            }
-//
-//        }
         
     }
     
@@ -168,37 +176,64 @@ class vipViewController: AnalyticsViewController {
     //实现通知监听方法---产品加载完成
      @objc func productsLoaded(nofi : Notification){
         print("产品加载完成")
-         
-         self.putchaseArray = nofi.object  as! [SKProduct]
-         weak var weakSelf = self //避免循环引用
-          DispatchQueue.main.async {
-//             weakSelf?.layountBtn()
-         }
         
+        payButton.isHidden = false
+        SVProgressHUD.dismiss()
+         self.putchaseArray = nofi.object  as! [SKProduct]
      }
      
      //实现通知监听方法---支付成功 并且第一次验证成功
      @objc func productPurchased(nofi : Notification) {
-   
+        payButton.isHidden = false
+        SVProgressHUD.dismiss()
         //和后台服务器交接
-        print("实现通知监听方法---支付成功 并且第一次验证成功")
+        print("---支付成功\(nofi)")
+        
+        
+        
+        let user = BmobUser.current()
+        user?.setObject(select + 1, forKey: "vip")
+        user?.setObject(currentTime(),forKey:"vipTime")
+        
+        if select == 0 {
+            user?.setObject("68",forKey:"vipMoney")
+        }else if(select == 1){
+            user?.setObject("168",forKey:"vipMoney")
+        }else if(select == 2){
+            user?.setObject("268",forKey:"vipMoney")
+        }
+        user?.updateInBackground { (isSuccessful, error) in
+
+            if(isSuccessful){
+
+                print("恭喜您开通会员")
+
+            }else{
+                print("====\(error)")
+            }
+
+        }
+        
      }
      
      //实现通知监听方法---- 失败
      @objc func  productFail(nofi : Notification) {
-         
+         print("交易失败\(nofi)")
+        SVProgressHUD.dismiss()
+        payButton.isHidden = false
      }
     
      //实现通知监听方法---- 重新购买
      @objc func  productRestored(nofi : Notification) {
-         
-            
+        SVProgressHUD.dismiss()
+        payButton.isHidden = false
      }
      
      //实现通知监听方法---- 失败
      @objc func  productPurchaseFailed(nofi : Notification) {
-        
-        print("交易失败")
+        SVProgressHUD.dismiss()
+        payButton.isHidden = false
+        print("交易失败-----")
          
         let  code = nofi.userInfo!["code"] as! String
         

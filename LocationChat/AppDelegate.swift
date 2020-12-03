@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AMapServices.shared().apiKey = LocationKey
         
         // 创建左中右控制器
-        let selfTabbar = vipViewController()
+        let selfTabbar = locationViewController()
         let leftController = leftRootViewController(nibName: "leftRootViewController", bundle: nil)
 //        selfTabbar.selectedIndex = 1
         //加入导航控制器 并设置重用标志

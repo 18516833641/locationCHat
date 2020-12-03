@@ -49,7 +49,12 @@ class addFriendViewController: AnalyticsViewController {
         if user != nil {
             
             let vip = user?.object(forKey: "vip")
-            if vip as! String == "1" {//已经开通vip
+            if vip as! Int == 0 {//未开通vip
+                
+                pushVipControllent()
+                
+            }else {//已开通vip
+                
                 
                 let query = BmobUser.query()
                 query?.whereKey("username", equalTo: textField.text)
@@ -63,6 +68,8 @@ class addFriendViewController: AnalyticsViewController {
 
                             SVProgressHUD.showError(withStatus: "输入的用户不存在")
                             SVProgressHUD.dismiss(withDelay: 0.75)
+                            
+                            return
                         }
 
                         for obj in array! as Array {
@@ -100,35 +107,14 @@ class addFriendViewController: AnalyticsViewController {
                             }
                         }
                     }
-                
-            }else if vip as! String == "0"{//未开通vip
             
-                let alertView = SmileAlert(title: "赶快去解锁吧", message: "位置变动提醒.\n实时定位和轨迹移动提醒.\n一键报警.", cancelButtonTitle: "取 消", sureButtonTitle: "确 定")
-                        alertView.show()
-                        //获取点击事件
-                        alertView.clickIndexClosure { (index) in
-                            print("点击了第" + "\(index)" + "个按钮")
-                            
-                            if(index == 2){
-                                let vc = vipViewController()
-                                vc.title = "解锁特权"
-                                self.navigationController?.pushViewController(vc, animated: false)
-                                alertView.dismiss()
-                            }
-                            
-                        }
-               
             }
             
             
 //
                 
         }else{
-            //对象为空时，可打开用户注册界面
-            BmobUser.logout()
-            let vc = loginViewController()
-            vc.title = "登录"
-            self.navigationController?.pushViewController(vc, animated: false)
+            
             
         }
         

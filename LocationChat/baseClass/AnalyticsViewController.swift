@@ -45,6 +45,79 @@ class AnalyticsViewController: UIViewController {
         return .lightContent
     }
     
+    func pushVipControllent() {
+        let alertView = SmileAlert(title: "赶快去解锁吧", message: "位置变动提醒.\n实时定位和轨迹移动提醒.\n一键报警.", cancelButtonTitle: "取 消", sureButtonTitle: "确 定")
+                alertView.show()
+                //获取点击事件
+                alertView.clickIndexClosure { (index) in
+                    print("点击了第" + "\(index)" + "个按钮")
+                    
+                    if(index == 2){
+                        let vc = vipViewController()
+                        vc.title = "解锁特权"
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        alertView.dismiss()
+                    }
+                    
+                }
+
+    }
+    
+    func isLogin() -> Bool {
+        
+        
+        let user = BmobUser.current()
+        
+//        let address = user?.object(forKey: "location") as? String
+        
+        if user != nil {
+            
+            return true
+            
+        }else{
+            
+            BmobUser.logout()
+            let vc = loginViewController()
+            vc.title = "登录"
+            self.navigationController?.pushViewController(vc, animated: false)
+            
+            return false
+        }
+    }
+    
+    func isVip() -> Bool {
+        let user = BmobUser.current()
+        
+        if user != nil {
+        
+            let vip = user?.object(forKey: "vip")
+            
+            if vip as! Int == 0 {//未开通vip
+                
+                let alertView = SmileAlert(title: "赶快去解锁吧", message: "位置变动提醒.\n实时定位和轨迹移动提醒.\n一键报警.", cancelButtonTitle: "取 消", sureButtonTitle: "确 定")
+                        alertView.show()
+                        //获取点击事件
+                        alertView.clickIndexClosure { (index) in
+                            print("点击了第" + "\(index)" + "个按钮")
+                            
+                            if(index == 2){
+                                let vc = vipViewController()
+                                vc.title = "解锁特权"
+                                self.navigationController?.pushViewController(vc, animated: false)
+                                alertView.dismiss()
+                            }
+                            
+                        }
+                return false
+            }else {//已开通vip
+                
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     //MARK:获取当前时间
     func currentTime() -> String {
         let dateformatter = DateFormatter()

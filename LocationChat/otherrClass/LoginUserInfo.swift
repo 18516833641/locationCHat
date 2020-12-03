@@ -14,6 +14,10 @@ struct t_LoginInfo_data:Decodable {
     var PhoneNumber:String? = nil//手机号
     var vip:String = "0" //是否开通vip
     var nickName:String? = nil//昵称
+    var address:String = ""
+    var time = ""
+    
+    
     
     
 }
@@ -24,6 +28,8 @@ extension UserDefaults {
         case PhoneNumber//手机号
         case nickName//昵称
         case vip
+        case address
+        case time
     }
     
     //存数据
