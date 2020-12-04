@@ -90,10 +90,9 @@ class homeViewController: AnalyticsViewController {
                 pushVipControllent()
                 
             }else {//已开通vip
-            
                 
+                addSMS()
                 
-               
             }
         }else{
             
@@ -103,6 +102,66 @@ class homeViewController: AnalyticsViewController {
            
         }
         
+        
+        
+    }
+    
+    func addSMS() {
+        
+        
+        let user = BmobUser.current()
+        let userPhone = user?.mobilePhoneNumber ?? ""
+        
+        let alert = UIAlertController.init(title: "紧急求救", message: nil, preferredStyle: .alert)
+                
+        //添加textField
+        alert.addTextField { (textField) in
+            //这里对textField进行设置
+            textField.placeholder = "输入手机号发送求救短信"
+            textField.keyboardType = .numberPad
+        
+        }
+
+        alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+            //这里获取textField的内容进行操作
+            let phone = (alert.textFields?.first)!.text!
+            print("输入的内容:\(phone)")
+            
+            if !self.isTelNumber(num: phone ) {
+                    
+                SVProgressHUD.showError(withStatus: "请输入正确的手机号")
+                SVProgressHUD.dismiss(withDelay: 0.75)
+                return
+            }
+            
+            if phone == userPhone {
+                SVProgressHUD.showError(withStatus: "本机用户不可发送")
+                SVProgressHUD.dismiss(withDelay: 0.75)
+                return
+            }
+
+            /**
+             *  请求验证码
+             *
+             *  @param number      手机号
+             *  @param templateStr 模板名
+             *  @param block       请求回调
+             */
+            BmobSMS.requestCodeInBackground(withPhoneNumber: phone, andTemplate: "sos") { (magid, error) in
+                if((error) != nil){
+                    
+                    print("masgid=======\(magid)")
+                    
+                    SVProgressHUD.showInfo(withStatus: "报警短信已发送")
+                    SVProgressHUD.dismiss()
+                }else{
+                    print("error ===== \(String(describing: error))")
+                }
+            }
+
+        }))
+
+        present(alert, animated: true, completion: nil)
         
         
     }

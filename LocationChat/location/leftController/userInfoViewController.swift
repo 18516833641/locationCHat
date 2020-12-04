@@ -14,15 +14,62 @@ class userInfoViewController: AnalyticsViewController {
     
     @IBOutlet weak var header: UIImageView!
     
+    @IBOutlet weak var vipTitle: UILabel!
+
+    @IBOutlet weak var vipLevel: UILabel!
+    
+    @IBOutlet weak var vipLine: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "编辑资料"
+        
+        let user = BmobUser.current()
+        
+        if user != nil {
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            
+            if vip as! Int == 0 {//未开通vip
+                
+                vipTitle.isHidden = true
+                vipLevel.isHidden = true
+                vipLine.isHidden = true
+               
+            }else if vip as! Int == 1 {//已开通月卡会员
+                
+                vipTitle.isHidden = false
+                vipLevel.isHidden = false
+                vipLine.isHidden = false
+                vipLevel.text = "月卡会员"
+               
+            }else if vip as! Int == 2 {//已开通季卡会员
+                
+                vipTitle.isHidden = false
+                vipLevel.isHidden = false
+                vipLine.isHidden = false
+                
+                vipLevel.text = "季卡会员"
+                
+                
+            }else if vip as! Int == 3{//已开通年卡会员
+                
+                vipTitle.isHidden = false
+                vipLevel.isHidden = false
+                vipLine.isHidden = false
+                
+                vipLevel.text = "年卡会员"
+                
+            }
+        }else{
+           
+        }
+        
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.init(red: 27/255, green: 39/255, blue: 85/255, alpha: 1)
-        
-        let user = BmobUser.current()
+
         let niakname = user?.object(forKey: "nickName")
         if niakname == nil {
             let user = BmobUser.current()?.mobilePhoneNumber.replacePhone()

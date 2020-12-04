@@ -31,6 +31,10 @@ class loginViewController: AnalyticsViewController {
 
         // Do any additional setup after loading the view.
         
+        loginUser.attributedPlaceholder = NSAttributedString.init(string:"请输入您的手机号", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+        
+        loginPass.attributedPlaceholder = NSAttributedString.init(string:"请输入验证码", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+        
         SetUI()
     }
 
@@ -51,60 +55,53 @@ class loginViewController: AnalyticsViewController {
             return
         }
         
-        if BmobUser.current() == nil {
-            
-            let user = BmobUser()
-            user.mobilePhoneNumber = loginUser.text//手机号
-            user.setObject(0, forKey: "vip")//vip
-            user.setObject("0", forKey: "cancel")//是否注销账户
-            user.setObject(loginUser.text, forKey: "nickName")//昵称
-            user.signUpOrLoginInbackground(withSMSCode: loginPass.text) { (isSuccessful, error) in
-                if error == nil{
+        let query = BmobUser.query()
+        query?.whereKey("username", equalTo: loginUser.text)
+        query?.findObjectsInBackground { (array, error) in
+
+            if error != nil{//走登录
+
+                BmobUser.loginInbackground(withMobilePhoneNumber: self.loginUser.text, andSMSCode: self.loginPass.text) { (user, error) in
+                        if user != nil{
+                            SVProgressHUD.show(withStatus: "登录成功")
+                            SVProgressHUD.dismiss(withDelay: 0.75)
+                            self.navigationController!.popViewController(animated: true)
+                        }else{
+                            
+                            print("=======\(error)")
+                            SVProgressHUD.showError(withStatus: "登录失败，请检查手机号、验证码")
+                            SVProgressHUD.dismiss(withDelay: 0.75)
+                           
+                        }
+                    }
+                
+            }else{//未查询到用户 走注册
+
+    
+                let user = BmobUser()
+                user.mobilePhoneNumber = self.loginUser.text//手机号
+                user.setObject(0, forKey: "vip")//vip
+                user.setObject("0", forKey: "cancel")//是否注销账户
+//                user.setObject("", forKey: "nickName")//昵称
+                user.setObject("", forKey: "vipTime")//开通会员时间
+                user.setObject("", forKey: "vipMoney")//开通会员钱
                     
-                    print("\(user)")
-                    
-                    SVProgressHUD.showInfo(withStatus: "登录成功")
-                    SVProgressHUD.dismiss(withDelay: 0.75)
-                    self.navigationController!.popViewController(animated: true)
-                    
-                }else{
-                    print("=====\(error)")
-//                    BmobUser.loginInbackground(withMobilePhoneNumber: self.loginUser.text, andSMSCode: self.loginPass.text) { (user, error) in
-//                            if user != nil{
-//                                SVProgressHUD.show(withStatus: "登录成功")
-//                                SVProgressHUD.dismiss(withDelay: 0.75)
-//                                self.navigationController!.popViewController(animated: true)
-//                            }else{
-//                                SVProgressHUD.showError(withStatus: "登录失败，请检查手机号、验证码")
-//                                SVProgressHUD.dismiss(withDelay: 0.75)
-//
-//                            }
-//                        }
-                }
-            }
-            
-        }else{
-            
-            BmobUser.loginInbackground(withMobilePhoneNumber: loginUser.text, andSMSCode: loginPass.text) { (user, error) in
-                    if user != nil{
-                        SVProgressHUD.show(withStatus: "登录成功")
+                user.signUpOrLoginInbackground(withSMSCode: self.loginPass.text) { (isSuccessful, error) in
+                    if error == nil{
+
+                        print("\(user)")
+
+                        SVProgressHUD.showInfo(withStatus: "登录成功")
                         SVProgressHUD.dismiss(withDelay: 0.75)
                         self.navigationController!.popViewController(animated: true)
+
                     }else{
-                        SVProgressHUD.showError(withStatus: "登录失败，请检查手机号、验证码")
-                        SVProgressHUD.dismiss(withDelay: 0.75)
-                       
+                        print("=====\(String(describing: error))")
                     }
                 }
-            
+                
+                }
         }
-        
-        
-        
-        
-        
-
-//        let token = UserDefaults.string(forKey: .token)
     }
     
     //验证码

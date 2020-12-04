@@ -109,6 +109,7 @@
 		041E1CA4254851CE007A751D /* searchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewController.swift; sourceTree = "<group>"; };
 		041E1CA5254851CE007A751D /* searchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = searchViewController.xib; sourceTree = "<group>"; };
 		041E1CAA254852D0007A751D /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		042BF8512578F679004B3D30 /* LocationChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LocationChat.entitlements; sourceTree = "<group>"; };
 		042CC886255A39E300FC4FD6 /* leftTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leftTableViewCell.swift; sourceTree = "<group>"; };
 		042CC887255A39E300FC4FD6 /* leftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = leftTableViewCell.xib; sourceTree = "<group>"; };
 		042CC88C255A40AF00FC4FD6 /* massageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = massageViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +140,6 @@
 		04B4739D2574CFDC00CD2719 /* guijiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guijiViewController.swift; sourceTree = "<group>"; };
 		04B4739E2574CFDC00CD2719 /* guijiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = guijiViewController.xib; sourceTree = "<group>"; };
 		04B473A22574DF7400CD2719 /* YHTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHTextView.swift; sourceTree = "<group>"; };
-		04B623D8256DEAA8008E5B27 /* LocationChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LocationChat.entitlements; sourceTree = "<group>"; };
 		04B623EC256DF7E6008E5B27 /* HttpsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpsRequest.swift; sourceTree = "<group>"; };
 		04DAB5B92567587500E32670 /* yinsiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yinsiViewController.swift; sourceTree = "<group>"; };
 		04DAB5BA2567587500E32670 /* yinsiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = yinsiViewController.xib; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		041E1C6125484FA1007A751D /* LocationChat */ = {
 			isa = PBXGroup;
 			children = (
-				04B623D8256DEAA8008E5B27 /* LocationChat.entitlements */,
+				042BF8512578F679004B3D30 /* LocationChat.entitlements */,
 				041E1C6225484FA1007A751D /* AppDelegate.swift */,
 				041E1C792548505F007A751D /* baseClass */,
 				0440FD82254900EF0061E2C6 /* third */,
@@ -714,7 +714,7 @@
 				CODE_SIGN_ENTITLEMENTS = LocationChat/LocationChat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = S5EHJK76M6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LocationChat/Info.plist;
@@ -728,7 +728,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/LocationChat/third",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Objc",
@@ -795,7 +795,7 @@
 				CODE_SIGN_ENTITLEMENTS = LocationChat/LocationChat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = S5EHJK76M6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LocationChat/Info.plist;
@@ -809,7 +809,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/LocationChat/third",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Objc",

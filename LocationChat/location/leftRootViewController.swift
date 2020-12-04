@@ -18,6 +18,8 @@ class leftRootViewController: AnalyticsViewController {
     
     @IBOutlet weak var viewWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var vipLevel: UIImageView!
+    
     @IBOutlet weak var userButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,13 +41,10 @@ class leftRootViewController: AnalyticsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         let user = BmobUser.current()
         
-        if user == nil {
-            
-            nickName.text = "立即登录"
-            
-        }else{
+        if user != nil {
             let niakname = user?.object(forKey: "nickName")
             let phone = user?.mobilePhoneNumber
             if niakname == nil {
@@ -53,7 +52,41 @@ class leftRootViewController: AnalyticsViewController {
             }else{
                 nickName.text = niakname as? String
             }
+            //进行操作
+            let vip = user?.object(forKey: "vip")
+            
+            if vip as! Int == 0 {//未开通vip
+                
+                vipLevel.isHidden = true
+           
+               
+            }else if vip as! Int == 1 {//已开通月卡会员
+                
+               
+                vipLevel.isHidden = false
+                vipLevel.image = UIImage.init(named: "Vip1")
+                
+               
+            }else if vip as! Int == 2 {//已开通季卡会员
+                
+                vipLevel.isHidden = false
+                vipLevel.image = UIImage.init(named: "Vip2")
+                
+                
+            }else if vip as! Int == 3{//已开通年卡会员
+                
+                vipLevel.isHidden = false
+                vipLevel.image = UIImage.init(named: "Vip3")
+                
+            }
+        }else{
+            
+            nickName.text = "立即登录"
+           
         }
+        
+        
+        
     }
     
     @IBAction func userAction(_ sender: Any) {

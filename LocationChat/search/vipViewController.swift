@@ -180,6 +180,8 @@ class vipViewController: AnalyticsViewController {
         payButton.isHidden = false
         SVProgressHUD.dismiss()
          self.putchaseArray = nofi.object  as! [SKProduct]
+        
+        
      }
      
      //实现通知监听方法---支付成功 并且第一次验证成功
@@ -259,7 +261,7 @@ extension vipViewController : UICollectionViewDelegate , UICollectionViewDataSou
         }
         
         let defaultSelectCell = IndexPath(row: 1, section: 0)
-        conllectionView.selectItem(at: defaultSelectCell, animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
+        self.conllectionView.selectItem(at:defaultSelectCell , animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
         
         let dataMoney = ["¥ 68","¥ 168","¥ 268"]
         let dataTitle = ["月卡会员","季卡会员","年卡会员"]
@@ -270,7 +272,7 @@ extension vipViewController : UICollectionViewDelegate , UICollectionViewDataSou
         cell.title.text = dataTitle[indexPath.row]
         cell.vipIcon.image = UIImage(named: vipImage[indexPath.row])
         
-        print(cell.bounds.size.height)
+//        print(cell.bounds.size.height)
         return cell
     }
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

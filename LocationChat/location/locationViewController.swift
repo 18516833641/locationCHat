@@ -356,17 +356,12 @@ extension locationViewController:MAMapViewDelegate,AMapLocationManagerDelegate{
                 userPhone = user?.mobilePhoneNumber ?? ""
                 if vip as! Int == 0 {//未开通vip
                     
-                   
-                    
                 }else{//已经开通vip
                 
                     //开通会员开始开启轨迹
                     addlocation()
                    
                 }
-            }else{
-                //对象为空时，可打开用户注册界面
-                
             }
         }
     }

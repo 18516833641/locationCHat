@@ -27,7 +27,7 @@ class myLoactionViewController: AnalyticsViewController {
     @IBOutlet weak var endTimeBut: UIButton!
     
     var startTimeLab = ""
-    var sendTimeLab = ""
+    var endTimeLab = ""
     
     let trackMapView = MKMapView(frame: UIScreen.main.bounds)
     var trackArr = Array<String>()
@@ -62,6 +62,10 @@ class myLoactionViewController: AnalyticsViewController {
         let user = BmobUser.current()
 
         let query:BmobQuery = BmobQuery(className: "Locat" + user!.mobilePhoneNumber)
+        
+        query.whereKey("lastTime", greaterThanOrEqualTo:startTimeLab ) //大于等于开始时间
+        query.whereKey("lastTime", lessThanOrEqualTo: endTimeLab)//小于结束时间
+        
             query.findObjectsInBackground { (array, error) in
                 for i in 0..<array!.count{
                     let obj = array?[i] as! BmobObject
@@ -130,7 +134,7 @@ class myLoactionViewController: AnalyticsViewController {
            
            print("\(otherData as! String)")
 
-            self.sendTimeLab = otherData as! String
+            self.endTimeLab = otherData as! String
 
            self.endTimeBut.setTitle((otherData as! String), for: .normal)
 
@@ -147,7 +151,7 @@ class myLoactionViewController: AnalyticsViewController {
             
             return
         }
-        if sendTimeLab.isEmpty {
+        if endTimeLab.isEmpty {
             SVProgressHUD.show(withStatus: "请选择结束时间")
             SVProgressHUD.dismiss(withDelay: 1)
             return
