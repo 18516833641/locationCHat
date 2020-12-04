@@ -127,8 +127,8 @@ class AnalyticsViewController: UIViewController {
     }
     
     //MARK:判断手机号
-    func isTelNumber(num:String)->Bool
-    {
+    func isTelNumber(num:String)->Bool{
+        
        let mobile = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$"
        let  CM = "^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$"
        let  CU = "^1(3[0-2]|5[256]|8[56])\\d{8}$"
@@ -149,6 +149,19 @@ class AnalyticsViewController: UIViewController {
             return false
        }
    }
+    
+    //保存图片至沙盒
+    func saveImage(currentImage: UIImage, persent: CGFloat, imageName: String) -> String{
+        
+        if let imageData = currentImage.jpegData(compressionQuality: persent) as NSData? {
+            let fullPath = NSHomeDirectory().appending("/Documents/").appending(imageName)
+            imageData.write(toFile: fullPath, atomically: true)
+            print("fullPath=\(fullPath)")
+            return fullPath
+        }
+        
+        return ""
+    }
 }
 extension String {
  /// 替换手机号中间四位

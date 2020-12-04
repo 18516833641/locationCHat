@@ -14,6 +14,7 @@ public protocol LeftViewControllerDelegate :class{
 
 class leftRootViewController: AnalyticsViewController {
 
+    @IBOutlet weak var user_header: UIImageView!
     @IBOutlet weak var nickName: UILabel!
     
     @IBOutlet weak var viewWidth: NSLayoutConstraint!
@@ -36,6 +37,7 @@ class leftRootViewController: AnalyticsViewController {
         tableView.register(UINib(nibName: "leftTableViewCell", bundle: nil), forCellReuseIdentifier: "leftTableViewCell")
         
         
+
         
     }
     
@@ -84,7 +86,15 @@ class leftRootViewController: AnalyticsViewController {
             nickName.text = "立即登录"
            
         }
-        
+        if let savedImage = UIImage(contentsOfFile: UserDefaults.string(forKey: .headerImage) ?? "") {
+            
+            self.user_header.image = savedImage
+            
+        } else {
+            
+            print("文件不存在")
+            
+        }
         
         
     }

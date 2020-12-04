@@ -31,7 +31,7 @@ class loginViewController: AnalyticsViewController {
 
         // Do any additional setup after loading the view.
         
-        loginUser.attributedPlaceholder = NSAttributedString.init(string:"请输入您的手机号", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+        loginUser.attributedPlaceholder = NSAttributedString.init(string:"请输入您的手机号", attributes: [NSAttributedString.Key.foregroundColor:UIColor.gray])
         
         loginPass.attributedPlaceholder = NSAttributedString.init(string:"请输入验证码", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
         
@@ -59,7 +59,7 @@ class loginViewController: AnalyticsViewController {
         query?.whereKey("username", equalTo: loginUser.text)
         query?.findObjectsInBackground { (array, error) in
 
-            if error != nil{//走登录
+            if array?.count ?? 0 > 1{//走登录
 
                 BmobUser.loginInbackground(withMobilePhoneNumber: self.loginUser.text, andSMSCode: self.loginPass.text) { (user, error) in
                         if user != nil{
@@ -68,7 +68,7 @@ class loginViewController: AnalyticsViewController {
                             self.navigationController!.popViewController(animated: true)
                         }else{
                             
-                            print("=======\(error)")
+                            print("=======\(String(describing: error))")
                             SVProgressHUD.showError(withStatus: "登录失败，请检查手机号、验证码")
                             SVProgressHUD.dismiss(withDelay: 0.75)
                            
@@ -76,13 +76,31 @@ class loginViewController: AnalyticsViewController {
                     }
                 
             }else{//未查询到用户 走注册
-
+                
+                SVProgressHUD.showInfo(withStatus: "注册中，请稍后...")
+                
+                let max: UInt32 = 80
+                let min: UInt32 = 1
+                
+                let number = arc4random_uniform(max - min) + min
+                
+                let userimageStr:String
+                
+                if number > 9 {
+                   userimageStr = "rdm_" + "\(number)"
+                }else{
+                    userimageStr = "rdm_0" + "\(number)"
+                }
+                
+                let image = UIImage(named: userimageStr)
+                let imagepath = self.saveImage(currentImage: image!, persent: 1, imageName: "header")
+                
+                UserDefaults.set(value: imagepath, forKey: UserDefaults.LoginInfo.headerImage)
     
                 let user = BmobUser()
                 user.mobilePhoneNumber = self.loginUser.text//手机号
                 user.setObject(0, forKey: "vip")//vip
                 user.setObject("0", forKey: "cancel")//是否注销账户
-//                user.setObject("", forKey: "nickName")//昵称
                 user.setObject("", forKey: "vipTime")//开通会员时间
                 user.setObject("", forKey: "vipMoney")//开通会员钱
                     
@@ -91,11 +109,13 @@ class loginViewController: AnalyticsViewController {
 
                         print("\(user)")
 
-                        SVProgressHUD.showInfo(withStatus: "登录成功")
+                        SVProgressHUD.dismiss()
+                        SVProgressHUD.showInfo(withStatus: "注册成功")
                         SVProgressHUD.dismiss(withDelay: 0.75)
                         self.navigationController!.popViewController(animated: true)
 
                     }else{
+                        SVProgressHUD.dismiss()
                         print("=====\(String(describing: error))")
                     }
                 }
@@ -123,6 +143,11 @@ class loginViewController: AnalyticsViewController {
             if((error) != nil){
                 
                 print("masgid=======\(magid)")
+                
+                if magid  == -1{
+                    SVProgressHUD.showInfo(withStatus: "验证码发送频繁，请与60分钟尝试")
+                    SVProgressHUD.dismiss(withDelay: 0.75)
+                }
             }else{
                 print("error ===== \(String(describing: error))")
             }

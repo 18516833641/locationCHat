@@ -22,11 +22,13 @@ class locationViewController: AnalyticsViewController{
     @IBOutlet weak var myLocation: UILabel!
     //    var clousre : MKPositioningClosure?
     
+    @IBOutlet weak var user_header: UIImageView!
+    
     @IBOutlet weak var textField: UITextField!
+    
     let locationManager = AMapLocationManager()
     
     var userPhone = ""
-    var nickName = ""
     
     var latitude:Double = 0.0
     var longitude:Double = 0.0
@@ -53,12 +55,23 @@ class locationViewController: AnalyticsViewController{
         
         self.view.bringSubviewToFront(topView)
         self.view.bringSubviewToFront(searchView)
+        
+        
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
+        if let savedImage = UIImage(contentsOfFile: UserDefaults.string(forKey: .headerImage) ?? "") {
+            
+            self.user_header.image = savedImage
+            
+        } else {
+            
+            print("文件不存在")
+            
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,7 +142,6 @@ class locationViewController: AnalyticsViewController{
             //进行操作
             let vip = user?.object(forKey: "vip")
             userPhone = user?.mobilePhoneNumber ?? ""
-            nickName = user?.object(forKey: "nickName") as! String
             
             if vip as! Int == 0 {//未开通vip
                 
@@ -158,8 +170,7 @@ class locationViewController: AnalyticsViewController{
             //进行操作
             let vip = user?.object(forKey: "vip")
             userPhone = user?.mobilePhoneNumber ?? ""
-            nickName = user?.object(forKey: "nickName") as! String
-            
+
             if vip as! Int == 0 {//已经开通vip
                 
                 pushVipControllent()

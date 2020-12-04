@@ -16,6 +16,8 @@ struct t_LoginInfo_data:Decodable {
     var nickName:String? = nil//昵称
     var address:String = ""
     var time = ""
+    var headerImage = ""
+    
     
     
     
@@ -30,6 +32,7 @@ extension UserDefaults {
         case vip
         case address
         case time
+        case headerImage
     }
     
     //存数据

@@ -27,6 +27,8 @@ class homeViewController: AnalyticsViewController {
         super.viewDidLoad()
         self.title = "关心的人"
 
+        
+
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "friendTableViewCell", bundle: nil), forCellReuseIdentifier: "friendTableViewCell")
         
@@ -47,6 +49,15 @@ class homeViewController: AnalyticsViewController {
         }else{
             time.text = UserDefaults.string(forKey: .time)
             address.text = UserDefaults.string(forKey: .address)
+            
+        }
+        if let savedImage = UIImage(contentsOfFile: UserDefaults.string(forKey: .headerImage) ?? "") {
+            
+            self.userIamge.image = savedImage
+            
+        } else {
+            
+            print("文件不存在")
             
         }
     }

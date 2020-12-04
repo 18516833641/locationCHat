@@ -13,6 +13,7 @@
                 <outlet property="nickName" destination="BZP-D9-p9l" id="rsf-zQ-aa4"/>
                 <outlet property="tableView" destination="JrY-ig-Vij" id="fAi-0j-kta"/>
                 <outlet property="userButton" destination="OZK-V2-OcI" id="mvq-Kn-ZpW"/>
+                <outlet property="user_header" destination="0cN-ni-lgl" id="24S-pw-idF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewWidth" destination="7b4-Yl-25K" id="StR-yP-c7l"/>
                 <outlet property="vipLevel" destination="iDx-wc-S1f" id="Dml-Zl-blw"/>
@@ -45,18 +46,6 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZK-V2-OcI">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="166"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="35"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="userAction:" destination="-1" eventType="touchUpInside" id="gO2-t7-eKI"/>
-                                    </connections>
-                                </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="F8H-R4-khP">
                                     <rect key="frame" x="70" y="98" width="63.5" height="20"/>
                                     <subviews>
@@ -82,6 +71,18 @@
                                         </imageView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZK-V2-OcI">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="166"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="35"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="userAction:" destination="-1" eventType="touchUpInside" id="gO2-t7-eKI"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.10588235294117647" green="0.15294117647058825" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>

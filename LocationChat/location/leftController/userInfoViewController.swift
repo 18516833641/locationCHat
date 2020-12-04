@@ -82,6 +82,20 @@ class userInfoViewController: AnalyticsViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        if let savedImage = UIImage(contentsOfFile: UserDefaults.string(forKey: .headerImage) ?? "") {
+            
+            self.header.image = savedImage
+            
+        } else {
+            
+            print("文件不存在")
+            
+        }
+    }
+    
     //MARK: - 相机
 
     //从相册中选择
@@ -146,13 +160,14 @@ class userInfoViewController: AnalyticsViewController {
     
     //MARK:确认提交
     @IBAction func centerAction(_ sender: Any) {
-        
+        SVProgressHUD.showInfo(withStatus: "保存信息中")
         if textField.text!.count > 1 {
             let user = BmobUser.current()
             user!.setObject(textField.text, forKey: "nickName")
             user!.updateInBackground { (isSuccessful, error) in
 
                 if(isSuccessful){
+                    SVProgressHUD.dismiss()
                     SVProgressHUD.show(withStatus: "更新昵称成功")
                     SVProgressHUD.dismiss(withDelay: 0.75)
                 }else{
@@ -167,32 +182,41 @@ class userInfoViewController: AnalyticsViewController {
         
         if (header.image != nil) {
             
-//            let imgData = UIImage.init(imageLiteralResourceName: "hhh").jpegData(compressionQuality: 1.0)
-//            let baseImg = imgData?.base64EncodedDataWithOptions(.Encoding64CharacterLineLength)
-//            
-//            var path = Bundle.main.bundlePath
-////            path.appendContentsOf("/test.txt")
-////            path.append(header.image)
-//            let obj = BmobObject(className: "_User")
-//            let  file = BmobFile(filePath: path)
-//            file!.saveInBackground { [weak file] (isSuccessful, error) in
-//                if isSuccessful {
-//                    //如果文件保存成功，则把文件添加到file列
-//                    let weakFile = file
-//                    obj?.setObject(weakFile, forKey: "file")
-//                    obj?.setObject("helloworld", forKey: "name")
-//                    obj?.saveInBackground(resultBlock: { (success, err) in
-//                        if err != nil {
-//                            print("save \(error)")
-//                        }
-//                    })
-//                }else{
-//                    print("upload \(error)")
-//                }
-//            }
+            let imagepath = saveImage(currentImage: header.image!, persent: 1, imageName: "header")
+            
+            UserDefaults.set(value: imagepath, forKey: UserDefaults.LoginInfo.headerImage)
+            
+           
+            
+//            let imageData = header.image?.pngData()
+//
+////            print(path)
+//               let obj = BmobObject(className: "phone")
+////               let  file = BmobFile(filePath: headerPath)
+//            let file = BmobFile(fileName: "hedaer.png", withFileData: imageData)
+//
+//                file?.save(inBackground: { (isSuccessful, error) in
+//               if isSuccessful {
+//                   //如果文件保存成功，则把文件添加到file列
+//                   let weakFile = file
+//                obj?.setObject(weakFile, forKey: "file")
+//                obj?.setObject("helloworld", forKey: "name")
+//                obj?.saveInBackground(resultBlock: { (success, err) in
+//                       if err != nil {
+//                           print("save \(error)")
+//                       }
+//                   })
+//               }else{
+//                   print("upload \(error)")
+//               }
+//               }) { (progress) in
+//                   print("progress \(progress)")
+//               }
+
         }
         
     }
+//    if let imageData = currentImage.jpegData(compressionQuality: persent) as NSData? {
     
     
 }

@@ -17,6 +17,7 @@
                 <outlet property="searchView" destination="rVI-dj-Cql" id="z3F-IP-ifp"/>
                 <outlet property="textField" destination="YXd-kb-n2a" id="caV-5h-AnT"/>
                 <outlet property="topView" destination="Kuv-lf-cUc" id="Phx-ka-i4V"/>
+                <outlet property="user_header" destination="gVh-8Z-frW" id="7Qi-V5-6mY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
